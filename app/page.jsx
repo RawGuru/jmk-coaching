@@ -123,7 +123,7 @@ export default function JMKLanding() {
           </Fade>
           <Fade delay={80}>
             <h1 className="serif" style={{ fontSize: "clamp(2.8rem, 5.5vw, 4.5rem)", lineHeight: 1.1, fontWeight: 300, letterSpacing: "-0.01em", marginBottom: "2rem", maxWidth: 620 }}>
-              I help people feel better in their body and keep it that way.
+              Serious attention to health, capability, and how you want to live.
             </h1>
           </Fade>
           <Fade delay={160}>
