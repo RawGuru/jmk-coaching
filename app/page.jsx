@@ -177,7 +177,7 @@ export default function JMKLanding() {
               What we work on depends on you. It might be movement, nourishment, recovery, pain, stress, or practical capability. The goal is something useful, sustainable, and grounded in real life. Most people I work with reach a point where they do not need me in the same way anymore. That is the point.
             </p>
             <p style={{ color: "var(--faint)", fontSize: "0.9rem", lineHeight: 1.8 }}>
-              I am based in Pittsburgh and work with people in person, virtually, and in other locations depending on the situation.
+              I am based in Pittsburgh and work with people in person, virtually, and elsewhere depending on the situation.
             </p>
           </section>
         </Fade>
