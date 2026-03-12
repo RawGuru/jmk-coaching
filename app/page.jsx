@@ -130,7 +130,7 @@ export default function JMKLanding() {
           </Fade>
           <Fade delay={160}>
             <p style={{ fontSize: "1.1rem", lineHeight: 1.85, color: "var(--muted)", maxWidth: 500, marginBottom: "2.5rem" }}>
-              How you move, eat, recover, and take care of yourself are connected. I work with people privately to sort out what is actually going on and build an approach that holds up in real life.
+              I work privately with people who want to think more clearly about movement, nourishment, recovery, and capability. Together, we sort out what is actually going on and build a physical foundation that holds up in real life.
             </p>
           </Fade>
           <Fade delay={240}>
