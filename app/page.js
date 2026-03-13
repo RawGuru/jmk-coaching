@@ -213,9 +213,16 @@ export default function JMKLanding() {
               </div>
 
               {status === "success" ? (
-                <div style={{ maxWidth: 480 }}>
-                  <p className="serif" style={{ fontSize: "1.5rem", fontWeight: 300, marginBottom: "1rem" }}>Application received.</p>
-                  <p style={{ color: "var(--muted)", fontSize: "1rem", lineHeight: 1.8 }}>I will review it and be in touch personally.</p>
+                <div style={{ maxWidth: 540 }}>
+                  <p className="serif" style={{ fontSize: "1.85rem", fontWeight: 300, marginBottom: "1.5rem", lineHeight: 1.3 }}>
+                    Application received.
+                  </p>
+                  <p style={{ color: "var(--muted)", fontSize: "1.05rem", lineHeight: 1.85, marginBottom: "1.25rem" }}>
+                    Thank you. I received your application and will review it personally.
+                  </p>
+                  <p style={{ color: "var(--faint)", fontSize: "0.95rem", lineHeight: 1.8 }}>
+                    If it looks like a fit, I will reach out with next steps.
+                  </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.5rem", maxWidth: 660 }}>
