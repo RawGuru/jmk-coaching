@@ -76,6 +76,13 @@ const emptyForm = {
 export default function JMKLanding() {
   const [form, setForm]     = useState(emptyForm);
   const [status, setStatus] = useState("idle");
+  const successRef = useRef(null);
+
+  useEffect(() => {
+    if (status === "success" && successRef.current) {
+      successRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [status]);
 
   const handleChange = (e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
 
@@ -204,7 +211,7 @@ export default function JMKLanding() {
           <section id="apply" style={{ padding: "0 0 7rem" }}>
             <div className="apply-pad" style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "10px", padding: "4rem 3.5rem" }}>
               {status === "success" ? (
-                <div style={{
+                <div ref={successRef} style={{
                   maxWidth: 540,
                   paddingTop: "0.5rem"
                 }}>
