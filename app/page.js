@@ -205,35 +205,49 @@ export default function JMKLanding() {
             <div className="apply-pad" style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "10px", padding: "4rem 3.5rem" }}>
               {status === "success" ? (
                 <div style={{
-                  maxWidth: 520,
-                  minHeight: 240,
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  gap: "1.5rem"
+                  maxWidth: 540,
+                  paddingTop: "0.5rem"
                 }}>
-                  <p className="serif" style={{
-                    fontSize: "clamp(2rem, 3.5vw, 2.5rem)",
-                    fontWeight: 300,
-                    lineHeight: 1.2,
-                    color: "var(--text)"
+                  <div style={{
+                    borderLeft: "3px solid var(--clay)",
+                    paddingLeft: "1.75rem",
+                    paddingTop: "1rem",
+                    paddingBottom: "3rem"
                   }}>
-                    Application received.
-                  </p>
-                  <p style={{
-                    color: "var(--muted)",
-                    fontSize: "1.1rem",
-                    lineHeight: 1.8
-                  }}>
-                    Thank you. I received your application and will review it personally.
-                  </p>
-                  <p style={{
-                    color: "var(--faint)",
-                    fontSize: "1rem",
-                    lineHeight: 1.7
-                  }}>
-                    If it looks like a fit, I will reach out with next steps.
-                  </p>
+                    <div style={{
+                      fontSize: "0.72rem",
+                      letterSpacing: "0.22em",
+                      textTransform: "uppercase",
+                      color: "var(--clay)",
+                      marginBottom: "1.5rem"
+                    }}>
+                      Confirmed
+                    </div>
+                    <p className="serif" style={{
+                      fontSize: "clamp(2rem, 3.5vw, 2.5rem)",
+                      fontWeight: 300,
+                      lineHeight: 1.2,
+                      color: "var(--text)",
+                      marginBottom: "1.5rem"
+                    }}>
+                      Application received.
+                    </p>
+                    <p style={{
+                      color: "var(--muted)",
+                      fontSize: "1.1rem",
+                      lineHeight: 1.8,
+                      marginBottom: "1.25rem"
+                    }}>
+                      Thank you. I received your application and will review it personally.
+                    </p>
+                    <p style={{
+                      color: "var(--faint)",
+                      fontSize: "1rem",
+                      lineHeight: 1.7
+                    }}>
+                      If it looks like a fit, I will reach out with next steps.
+                    </p>
+                  </div>
                 </div>
               ) : (
                 <>
