@@ -203,28 +203,48 @@ export default function JMKLanding() {
         <Fade>
           <section id="apply" style={{ padding: "0 0 7rem" }}>
             <div className="apply-pad" style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "10px", padding: "4rem 3.5rem" }}>
-              <div style={{ maxWidth: 540, marginBottom: "3rem" }}>
-                <div style={{ fontSize: "0.72rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--olive)", marginBottom: "1.25rem" }}>
-                  Apply to work with me
-                </div>
-                <h2 className="serif" style={{ fontSize: "clamp(1.7rem, 3vw, 2.4rem)", lineHeight: 1.2, fontWeight: 300 }}>
-                  I read every application personally before responding. Answer honestly and simply. That is what helps me understand whether I can actually help.
-                </h2>
-              </div>
-
               {status === "success" ? (
-                <div style={{ maxWidth: 540 }}>
-                  <p className="serif" style={{ fontSize: "1.85rem", fontWeight: 300, marginBottom: "1.5rem", lineHeight: 1.3 }}>
+                <div style={{
+                  maxWidth: 520,
+                  minHeight: 240,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  gap: "1.5rem"
+                }}>
+                  <p className="serif" style={{
+                    fontSize: "clamp(2rem, 3.5vw, 2.5rem)",
+                    fontWeight: 300,
+                    lineHeight: 1.2,
+                    color: "var(--text)"
+                  }}>
                     Application received.
                   </p>
-                  <p style={{ color: "var(--muted)", fontSize: "1.05rem", lineHeight: 1.85, marginBottom: "1.25rem" }}>
+                  <p style={{
+                    color: "var(--muted)",
+                    fontSize: "1.1rem",
+                    lineHeight: 1.8
+                  }}>
                     Thank you. I received your application and will review it personally.
                   </p>
-                  <p style={{ color: "var(--faint)", fontSize: "0.95rem", lineHeight: 1.8 }}>
+                  <p style={{
+                    color: "var(--faint)",
+                    fontSize: "1rem",
+                    lineHeight: 1.7
+                  }}>
                     If it looks like a fit, I will reach out with next steps.
                   </p>
                 </div>
               ) : (
+                <>
+                  <div style={{ maxWidth: 540, marginBottom: "3rem" }}>
+                    <div style={{ fontSize: "0.72rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--olive)", marginBottom: "1.25rem" }}>
+                      Apply to work with me
+                    </div>
+                    <h2 className="serif" style={{ fontSize: "clamp(1.7rem, 3vw, 2.4rem)", lineHeight: 1.2, fontWeight: 300 }}>
+                      I read every application personally before responding. Answer honestly and simply. That is what helps me understand whether I can actually help.
+                    </h2>
+                  </div>
                 <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.5rem", maxWidth: 660 }}>
 
                   {/* name + email */}
@@ -327,6 +347,7 @@ export default function JMKLanding() {
                     <p style={{ marginTop: "1.25rem", fontSize: "0.78rem", color: "var(--faint)" }}>I work with a limited number of people and respond personally.</p>
                   </div>
                 </form>
+                </>
               )}
             </div>
           </section>
