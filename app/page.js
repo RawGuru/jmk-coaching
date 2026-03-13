@@ -45,7 +45,7 @@ const formFields = [
     id: "workTogether",
     label: "How would you like to work together?",
     type: "radio",
-    options: ["Virtual", "Pittsburgh", "Custom / Destination"],
+    options: ["Virtual", "Pittsburgh", "Elsewhere / Destination"],
     required: true
   },
   {
@@ -69,7 +69,7 @@ const formFields = [
 ];
 
 const emptyForm = {
-  name: "", email: "", phone: "",
+  name: "", email: "",
   ...Object.fromEntries(formFields.map(f => [f.id, ""]))
 };
 
@@ -231,15 +231,6 @@ export default function JMKLanding() {
                     ))}
                   </div>
 
-                  {/* phone */}
-                  <label style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-                    <span style={{ fontSize: "0.78rem", color: "var(--muted)", letterSpacing: "0.04em" }}>
-                      Phone <span style={{ color: "var(--faint)" }}>(optional)</span>
-                    </span>
-                    <input name="phone" type="tel" placeholder="Your number" value={form.phone} onChange={handleChange}
-                      style={{ background: "#FAF7F0", border: "1px solid var(--border-input)", borderRadius: "4px", padding: "0.75rem 1rem", color: "var(--text)", outline: "none", maxWidth: 300 }} />
-                  </label>
-
                   {/* open-ended fields */}
                   {formFields.map(field => (
                     <div key={field.id} style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -253,21 +244,50 @@ export default function JMKLanding() {
                         </p>
                       )}
                       {field.type === "radio" ? (
-                        <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                          {field.options.map(option => (
-                            <label key={option} style={{ display: "flex", alignItems: "center", gap: "0.5rem", cursor: "pointer" }}>
-                              <input
-                                type="radio"
-                                name={field.id}
-                                value={option}
-                                checked={form[field.id] === option}
-                                onChange={handleChange}
-                                required={field.required}
-                                style={{ cursor: "pointer" }}
-                              />
-                              <span style={{ fontSize: "0.95rem", color: "var(--text)" }}>{option}</span>
-                            </label>
-                          ))}
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.65rem" }}>
+                          {field.options.map(option => {
+                            const isSelected = form[field.id] === option;
+                            return (
+                              <label
+                                key={option}
+                                style={{
+                                  display: "inline-flex",
+                                  alignItems: "center",
+                                  cursor: "pointer",
+                                  padding: "0.5rem 1rem",
+                                  fontSize: "0.85rem",
+                                  color: isSelected ? "var(--text)" : "var(--muted)",
+                                  background: isSelected ? "#FAF7F0" : "transparent",
+                                  border: `1px solid ${isSelected ? "var(--border-input)" : "var(--border)"}`,
+                                  borderRadius: "4px",
+                                  transition: "all 0.2s ease",
+                                }}
+                                onMouseEnter={(e) => {
+                                  if (!isSelected) {
+                                    e.currentTarget.style.borderColor = "var(--border-input)";
+                                    e.currentTarget.style.background = "#FDFCFA";
+                                  }
+                                }}
+                                onMouseLeave={(e) => {
+                                  if (!isSelected) {
+                                    e.currentTarget.style.borderColor = "var(--border)";
+                                    e.currentTarget.style.background = "transparent";
+                                  }
+                                }}
+                              >
+                                <input
+                                  type="radio"
+                                  name={field.id}
+                                  value={option}
+                                  checked={isSelected}
+                                  onChange={handleChange}
+                                  required={field.required}
+                                  style={{ position: "absolute", opacity: 0, pointerEvents: "none" }}
+                                />
+                                {option}
+                              </label>
+                            );
+                          })}
                         </div>
                       ) : (
                         <textarea
@@ -345,9 +365,8 @@ export default function JMKLanding() {
         </Fade>
 
         {/* FOOTER */}
-        <footer style={{ borderTop: "1px solid var(--border)", padding: "2.25rem 0", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
+        <footer style={{ borderTop: "1px solid var(--border)", padding: "2.25rem 0", display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
           <div style={{ fontSize: "0.72rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--faint)" }}>Jon-Michael Kerestes</div>
-          <div style={{ fontSize: "0.72rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--faint)" }}>Physical Integration</div>
         </footer>
 
       </div>
