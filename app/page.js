@@ -33,20 +33,39 @@ function Fade({ children, delay = 0, style = {} }) {
 }
 
 const recognitionLines = [
-  "You have tried things that helped for a while but did not hold.",
+  "You want to make better use of your body, your habits, and your attention.",
   "You want to feel stronger and more capable without it taking over your life.",
-  "You want someone who understands how all of it connects.",
-  "You want an approach you can actually keep.",
+  "You want someone who understands how movement, nourishment, and recovery connect.",
+  "You want an approach that is good enough to keep.",
 ];
 
 // required: true = required field, false = optional
 const formFields = [
-  { id: "brought", label: "What brought you here right now?",                              required: true  },
-  { id: "off",     label: "What feels most off in your body or life?",                     required: true  },
-  { id: "hoping",  label: "What are you hoping changes over the next 3 to 12 months?",     required: true  },
-  { id: "tried",   label: "What have you already tried?",                                  required: false },
-  { id: "format",  label: "Are you looking for in person, virtual, or either?",            required: false },
-  { id: "why",     label: "Why do you think I may be the right person to help?",           required: true  },
+  {
+    id: "workTogether",
+    label: "How would you like to work together?",
+    type: "radio",
+    options: ["Virtual", "Pittsburgh", "Custom / Destination"],
+    required: true
+  },
+  {
+    id: "question1",
+    label: "What feels hardest to get right in your body or day-to-day life right now, and what is it getting in the way of?",
+    helper: "What are you no longer doing that you used to do, or wish you could be doing?",
+    required: true
+  },
+  {
+    id: "question2",
+    label: "What have you tried that helped, even partially, and why do you think it did not hold?",
+    helper: "Tell me what actually helped, even if it only worked for a while.",
+    required: true
+  },
+  {
+    id: "question3",
+    label: "If we were to build something practical, honest, and grounded in your real life, what makes right now the moment to do it?",
+    helper: "Why now?",
+    required: true
+  },
 ];
 
 const emptyForm = {
@@ -123,12 +142,12 @@ export default function JMKLanding() {
           </Fade>
           <Fade delay={80}>
             <h1 className="serif" style={{ fontSize: "clamp(2.8rem, 5.5vw, 4.5rem)", lineHeight: 1.1, fontWeight: 300, letterSpacing: "-0.01em", marginBottom: "2rem", maxWidth: 620 }}>
-              I help people feel better in their body and keep it that way.
+              Serious attention to health, capability, and how you want to live.
             </h1>
           </Fade>
           <Fade delay={160}>
             <p style={{ fontSize: "1.1rem", lineHeight: 1.85, color: "var(--muted)", maxWidth: 500, marginBottom: "2.5rem" }}>
-              How you move, eat, recover, and take care of yourself are connected. I work with people privately to sort out what is actually going on and build an approach that holds up in real life.
+              I work privately with people who want to think more clearly about movement, nourishment, recovery, and capability. Together, we sort out what is actually going on and build a physical foundation that holds up in real life.
             </p>
           </Fade>
           <Fade delay={240}>
@@ -151,7 +170,7 @@ export default function JMKLanding() {
               Most approaches to health do not account for how you actually live. They give you a plan that works on paper and falls apart in practice.
             </p>
             <p style={{ color: "var(--muted)", fontSize: "1.05rem", lineHeight: 1.85, maxWidth: 540 }}>
-              I start with what is real for you right now. Your energy, your pain, your schedule, your history, what you have already tried. Then we find what matters most and build from there.
+              I start with what is real for you right now. Your energy, your pain, your schedule, your history, and what you have already tried. Whether you are trying to rebuild something that is not working or take a healthy system to the next level, we find what matters most and build from there.
             </p>
           </section>
         </Fade>
@@ -172,10 +191,10 @@ export default function JMKLanding() {
         <Fade>
           <section style={{ padding: "1rem 0 5rem", maxWidth: 580 }}>
             <p style={{ color: "var(--muted)", fontSize: "1.05rem", lineHeight: 1.9, marginBottom: "1.25rem" }}>
-              What we work on depends on you. It might be movement, nourishment, recovery, pain, stress, or practical capability. The goal is something useful, sustainable, and grounded in real life. Most people I work with reach a point where they do not need me in the same way anymore. That is the point.
+              What we work on depends on your situation. It might involve movement, nourishment, recovery, pain, stress, or practical capability. The goal is something useful, sustainable, and grounded in real life, so you can carry it forward on your own.
             </p>
             <p style={{ color: "var(--faint)", fontSize: "0.9rem", lineHeight: 1.8 }}>
-              I am based in Pittsburgh and work with people in person, virtually, and in other locations depending on the situation.
+              I am based in Pittsburgh and work with people in person, virtually, and elsewhere depending on the situation.
             </p>
           </section>
         </Fade>
@@ -189,7 +208,7 @@ export default function JMKLanding() {
                   Apply to work with me
                 </div>
                 <h2 className="serif" style={{ fontSize: "clamp(1.7rem, 3vw, 2.4rem)", lineHeight: 1.2, fontWeight: 300 }}>
-                  If this feels relevant, fill this out and I will review it personally.
+                  I read every application personally before responding. Answer honestly and simply. That is what helps me understand whether I can actually help.
                 </h2>
               </div>
 
@@ -223,16 +242,45 @@ export default function JMKLanding() {
 
                   {/* open-ended fields */}
                   {formFields.map(field => (
-                    <label key={field.id} style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-                      <span style={{ fontSize: "0.78rem", color: "var(--muted)", letterSpacing: "0.04em" }}>
+                    <div key={field.id} style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                      <label style={{ fontSize: "0.78rem", color: "var(--muted)", letterSpacing: "0.04em" }}>
                         {field.label}
                         {!field.required && <span style={{ color: "var(--faint)" }}> (optional)</span>}
-                      </span>
-                      <textarea name={field.id} rows={3} placeholder="Write here"
-                        value={form[field.id]} onChange={handleChange}
-                        required={field.required}
-                        style={{ background: "#FAF7F0", border: "1px solid var(--border-input)", borderRadius: "4px", padding: "0.75rem 1rem", color: "var(--text)", outline: "none", resize: "vertical", width: "100%" }} />
-                    </label>
+                      </label>
+                      {field.helper && (
+                        <p style={{ fontSize: "0.75rem", color: "var(--faint)", marginTop: "-0.25rem", marginBottom: "0.25rem" }}>
+                          {field.helper}
+                        </p>
+                      )}
+                      {field.type === "radio" ? (
+                        <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                          {field.options.map(option => (
+                            <label key={option} style={{ display: "flex", alignItems: "center", gap: "0.5rem", cursor: "pointer" }}>
+                              <input
+                                type="radio"
+                                name={field.id}
+                                value={option}
+                                checked={form[field.id] === option}
+                                onChange={handleChange}
+                                required={field.required}
+                                style={{ cursor: "pointer" }}
+                              />
+                              <span style={{ fontSize: "0.95rem", color: "var(--text)" }}>{option}</span>
+                            </label>
+                          ))}
+                        </div>
+                      ) : (
+                        <textarea
+                          name={field.id}
+                          rows={3}
+                          placeholder="Write here"
+                          value={form[field.id]}
+                          onChange={handleChange}
+                          required={field.required}
+                          style={{ background: "#FAF7F0", border: "1px solid var(--border-input)", borderRadius: "4px", padding: "0.75rem 1rem", color: "var(--text)", outline: "none", resize: "vertical", width: "100%" }}
+                        />
+                      )}
+                    </div>
                   ))}
 
                   <div style={{ paddingTop: "0.5rem" }}>
@@ -257,6 +305,12 @@ export default function JMKLanding() {
           </section>
         </Fade>
 
+        {/* Future sections can be added here:
+            - "How this starts" section
+            - Proof / testimonial blocks
+            - Separate Pittsburgh and virtual pathways
+        */}
+
         {/* ABOUT */}
         <Fade>
           <section id="about" style={{ borderTop: "1px solid var(--border)", padding: "6rem 0 8rem" }}>
@@ -272,18 +326,18 @@ export default function JMKLanding() {
                   />
                 */}
                 <div style={{ width: "100%", aspectRatio: "3/4", background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "8px", display: "flex", alignItems: "flex-end", padding: "1.25rem" }}>
-                  <p style={{ fontSize: "0.72rem", color: "var(--faint)", lineHeight: 1.6 }}>Photo here. In your space. Not posing.</p>
+                  <p style={{ fontSize: "0.72rem", color: "var(--faint)", lineHeight: 1.6 }}>Photo here.</p>
                 </div>
               </div>
               <div style={{ maxWidth: 520 }}>
                 <p className="serif" style={{ fontSize: "clamp(1.4rem, 2.4vw, 1.85rem)", lineHeight: 1.45, fontWeight: 300, marginBottom: "2rem" }}>
-                  I spent three years as a resident athlete at the Olympic Training Center, graduated from the Air Force Academy, and was ranked sixth nationally in judo. I served as an Air Force Captain. I have been coaching since 2004 and studying how people actually change the entire time.
+                  I spent three years training at the Olympic Training Center in Colorado Springs, graduated from the Air Force Academy, and was ranked sixth nationally in judo. I served as an Air Force Captain. I have been coaching since 2004 and studying how people actually change the entire time.
                 </p>
                 <p style={{ color: "var(--muted)", fontSize: "1.05rem", lineHeight: 1.85, marginBottom: "1.5rem" }}>
-                  That background gave me a specific lens. The body is not a separate project from your life. It is the infrastructure your life runs on.
+                  That background gave me a specific lens. Movement, nourishment, and recovery are part of the structure your life runs on. When that structure is working well, everything else gets easier.
                 </p>
                 <p style={{ color: "var(--muted)", fontSize: "1.05rem", lineHeight: 1.85 }}>
-                  I am less interested in forcing people into systems than in helping them find forms of care that are effective, enjoyable, and sustainable.
+                  I help people find forms of care that are effective, enjoyable, and sustainable.
                 </p>
               </div>
             </div>
