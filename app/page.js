@@ -39,6 +39,43 @@ const recognitionLines = [
   "You want an approach that is good enough to keep.",
 ];
 
+const waysToWork = [
+  {
+    heading: "Ten minutes.",
+    body: "One thing, on video. You talk, I say back what I understand, and you tell me when I've got it. Then I give you my read. The right place to start if you're deciding whether to work with me.",
+    price: "$20",
+    cta: "Book on MYCA",
+    href: "https://myca.live",
+    external: true,
+  },
+  {
+    heading: "One hour on video.",
+    body: "We take your situation apart and you leave with the two or three things that matter most and exactly how to do them.",
+    price: "$200",
+    cta: "Request a time",
+    href: "#apply",
+    external: false,
+  },
+  {
+    heading: "One day in person.",
+    body: "Anywhere in the world, or you come to me. Movement, training, and recovery handled hands-on, inside your actual life.",
+    price: "$1,500 plus travel",
+    cta: "Request a day",
+    href: "#apply",
+    external: false,
+  },
+  {
+    heading: "Three months, private.",
+    body: "Weekly sessions on video, direct access between them, and one or more days in person as needed. For people who want the whole structure rebuilt.",
+    price: "$3,000, by application",
+    cta: "Apply",
+    href: "#apply",
+    external: false,
+  },
+];
+
+const applyOptions = ["One hour on video", "One day in person", "Three months private"];
+
 // required: true = required field, false = optional
 const formFields = [
   {
@@ -69,6 +106,7 @@ const formFields = [
 ];
 
 const emptyForm = {
+  applyingFor: "",
   name: "", email: "",
   ...Object.fromEntries(formFields.map(f => [f.id, ""]))
 };
@@ -116,6 +154,7 @@ export default function JMKLanding() {
         input, textarea { font-family: 'Source Sans 3', sans-serif; font-size: 1rem; }
         @media (max-width: 820px) {
           .two-col   { grid-template-columns: 1fr !important; gap: 2rem !important; }
+          .ways-grid { grid-template-columns: 1fr !important; }
           .two-input { grid-template-columns: 1fr !important; }
           .site-nav  { gap: 1.5rem !important; }
           .apply-pad { padding: 2.5rem 1.75rem !important; }
@@ -151,6 +190,11 @@ export default function JMKLanding() {
             <h1 className="serif" style={{ fontSize: "clamp(2.8rem, 5.5vw, 4.5rem)", lineHeight: 1.1, fontWeight: 300, letterSpacing: "-0.01em", marginBottom: "2rem", maxWidth: 620 }}>
               Serious attention to health, capability, and how you want to live.
             </h1>
+          </Fade>
+          <Fade delay={120}>
+            <p style={{ fontSize: "0.9rem", letterSpacing: "0.02em", lineHeight: 1.7, color: "var(--faint)", maxWidth: 500, marginBottom: "1.75rem" }}>
+              Olympic Training Center. Air Force Academy. Ranked sixth nationally in judo. Coaching since 2004.
+            </p>
           </Fade>
           <Fade delay={160}>
             <p style={{ fontSize: "1.1rem", lineHeight: 1.85, color: "var(--muted)", maxWidth: 500, marginBottom: "2.5rem" }}>
@@ -201,8 +245,47 @@ export default function JMKLanding() {
               What we work on depends on your situation. It might involve movement, nourishment, recovery, pain, stress, or practical capability. The goal is something useful, sustainable, and grounded in real life, so you can carry it forward on your own.
             </p>
             <p style={{ color: "var(--faint)", fontSize: "0.9rem", lineHeight: 1.8 }}>
-              I am based in Pittsburgh and work with people in person, virtually, and elsewhere depending on the situation.
+              I work with people anywhere in the world, in person or on video.
             </p>
+          </section>
+        </Fade>
+
+        {/* WAYS TO WORK */}
+        <Fade>
+          <section style={{ borderTop: "1px solid var(--border)", padding: "6rem 0" }}>
+            <h2 className="serif" style={{ fontSize: "clamp(1.7rem, 3vw, 2.4rem)", lineHeight: 1.2, fontWeight: 300, marginBottom: "3rem" }}>
+              Four ways to work with me
+            </h2>
+            <div className="ways-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.5rem" }}>
+              {waysToWork.map((card) => (
+                <div key={card.heading} style={{
+                  background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "10px",
+                  padding: "2.25rem 2rem", display: "flex", flexDirection: "column",
+                }}>
+                  <h3 className="serif" style={{ fontSize: "clamp(1.3rem, 2.2vw, 1.65rem)", lineHeight: 1.25, fontWeight: 400, marginBottom: "1rem" }}>
+                    {card.heading}
+                  </h3>
+                  <p style={{ color: "var(--muted)", fontSize: "1rem", lineHeight: 1.8, marginBottom: "1.75rem", flexGrow: 1 }}>
+                    {card.body}
+                  </p>
+                  <div style={{ fontSize: "0.9rem", letterSpacing: "0.02em", color: "var(--clay)", marginBottom: "1.5rem" }}>
+                    {card.price}
+                  </div>
+                  <a
+                    href={card.href}
+                    {...(card.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    style={{
+                      display: "inline-flex", alignItems: "center", justifyContent: "center", alignSelf: "flex-start",
+                      background: "var(--text)", color: "var(--bg)",
+                      padding: "0.7rem 1.4rem", fontSize: "0.8rem", letterSpacing: "0.07em",
+                      border: "1px solid var(--text)", borderRadius: "6px", transition: "opacity 0.2s",
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.opacity = "0.8"}
+                    onMouseLeave={e => e.currentTarget.style.opacity = "1"}
+                  >{card.cta}</a>
+                </div>
+              ))}
+            </div>
           </section>
         </Fade>
 
@@ -267,6 +350,54 @@ export default function JMKLanding() {
                     </h2>
                   </div>
                 <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.5rem", maxWidth: 660 }}>
+
+                  {/* which option are you applying for */}
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                    <label style={{ fontSize: "0.78rem", color: "var(--muted)", letterSpacing: "0.04em" }}>
+                      Which option are you applying for?
+                    </label>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.65rem" }}>
+                      {applyOptions.map(option => {
+                        const isSelected = form.applyingFor === option;
+                        return (
+                          <label
+                            key={option}
+                            style={{
+                              display: "inline-flex", alignItems: "center", cursor: "pointer",
+                              padding: "0.5rem 1rem", fontSize: "0.85rem",
+                              color: isSelected ? "var(--text)" : "var(--muted)",
+                              background: isSelected ? "#FAF7F0" : "transparent",
+                              border: `1px solid ${isSelected ? "var(--border-input)" : "var(--border)"}`,
+                              borderRadius: "4px", transition: "all 0.2s ease",
+                            }}
+                            onMouseEnter={(e) => {
+                              if (!isSelected) {
+                                e.currentTarget.style.borderColor = "var(--border-input)";
+                                e.currentTarget.style.background = "#FDFCFA";
+                              }
+                            }}
+                            onMouseLeave={(e) => {
+                              if (!isSelected) {
+                                e.currentTarget.style.borderColor = "var(--border)";
+                                e.currentTarget.style.background = "transparent";
+                              }
+                            }}
+                          >
+                            <input
+                              type="radio"
+                              name="applyingFor"
+                              value={option}
+                              checked={isSelected}
+                              onChange={handleChange}
+                              required
+                              style={{ position: "absolute", opacity: 0, pointerEvents: "none" }}
+                            />
+                            {option}
+                          </label>
+                        );
+                      })}
+                    </div>
+                  </div>
 
                   {/* name + email */}
                   <div className="two-input" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
@@ -386,17 +517,11 @@ export default function JMKLanding() {
             <div className="two-col" style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "4rem", alignItems: "start" }}>
               <div>
                 <div style={{ fontSize: "0.72rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--olive)", marginBottom: "1.75rem" }}>About</div>
-                {/*
-                  PHOTO: replace this block with:
-                  <img
-                    src="/your-photo.jpg"
-                    alt="Jon-Michael Kerestes"
-                    style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", borderRadius: "8px", display: "block" }}
-                  />
-                */}
-                <div style={{ width: "100%", aspectRatio: "3/4", background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "8px", display: "flex", alignItems: "flex-end", padding: "1.25rem" }}>
-                  <p style={{ fontSize: "0.72rem", color: "var(--faint)", lineHeight: 1.6 }}>Photo here.</p>
-                </div>
+                <img
+                  src="/jon-michael.jpg"
+                  alt="Jon-Michael Kerestes"
+                  style={{ width: "100%", aspectRatio: "1/1", objectFit: "cover", borderRadius: "50%", display: "block" }}
+                />
               </div>
               <div style={{ maxWidth: 520 }}>
                 <p className="serif" style={{ fontSize: "clamp(1.4rem, 2.4vw, 1.85rem)", lineHeight: 1.45, fontWeight: 300, marginBottom: "2rem" }}>
