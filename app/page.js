@@ -152,12 +152,15 @@ export default function JMKLanding() {
         .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
         a { color: inherit; text-decoration: none; }
         input, textarea { font-family: 'Source Sans 3', sans-serif; font-size: 1rem; }
+        .hero-photo { width: 320px; height: 320px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border); display: block; }
         @media (max-width: 820px) {
           .two-col   { grid-template-columns: 1fr !important; gap: 2rem !important; }
           .ways-grid { grid-template-columns: 1fr !important; }
           .two-input { grid-template-columns: 1fr !important; }
           .site-nav  { gap: 1.5rem !important; }
           .apply-pad { padding: 2.5rem 1.75rem !important; }
+          .hero-grid { grid-template-columns: 1fr !important; }
+          .hero-photo { width: 160px !important; height: 160px !important; margin: 0 auto; order: -1; }
         }
       `}</style>
 
@@ -180,75 +183,44 @@ export default function JMKLanding() {
         </header>
 
         {/* HERO */}
-        <section style={{ padding: "5rem 0 6rem", maxWidth: 700 }}>
-          <Fade>
-            <div style={{ fontSize: "0.72rem", letterSpacing: "0.24em", textTransform: "uppercase", color: "var(--olive)", marginBottom: "2rem" }}>
-              Physical Integration
+        <section style={{ padding: "5rem 0 6rem" }}>
+          <div className="hero-grid" style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "4rem", alignItems: "center" }}>
+            <div style={{ maxWidth: 620 }}>
+              <Fade>
+                <div style={{ fontSize: "0.72rem", letterSpacing: "0.24em", textTransform: "uppercase", color: "var(--olive)", marginBottom: "2rem" }}>
+                  Physical Integration
+                </div>
+              </Fade>
+              <Fade delay={80}>
+                <h1 className="serif" style={{ fontSize: "clamp(2.8rem, 5.5vw, 4.5rem)", lineHeight: 1.1, fontWeight: 300, letterSpacing: "-0.01em", marginBottom: "2rem", maxWidth: 620 }}>
+                  Serious attention to health, capability, and how you want to live.
+                </h1>
+              </Fade>
+              <Fade delay={120}>
+                <p style={{ fontSize: "0.9rem", letterSpacing: "0.02em", lineHeight: 1.7, color: "var(--faint)", maxWidth: 500, marginBottom: "1.75rem" }}>
+                  Olympic Training Center. Air Force Academy. Ranked sixth nationally in judo. Coaching since 2004.
+                </p>
+              </Fade>
+              <Fade delay={160}>
+                <p style={{ fontSize: "1.1rem", lineHeight: 1.85, color: "var(--muted)", maxWidth: 500, marginBottom: "2.5rem" }}>
+                  I work privately with people who want to think more clearly about movement, nourishment, recovery, and capability. Together, we sort out what is actually going on and build a physical foundation that holds up in real life.
+                </p>
+              </Fade>
+              <Fade delay={240}>
+                <a href="#apply" style={{
+                  display: "inline-flex", alignItems: "center", justifyContent: "center",
+                  background: "var(--text)", color: "var(--bg)",
+                  padding: "0.8rem 1.6rem", fontSize: "0.82rem", letterSpacing: "0.07em",
+                  border: "1px solid var(--text)", borderRadius: "6px", transition: "opacity 0.2s",
+                }}
+                  onMouseEnter={e => e.currentTarget.style.opacity = "0.8"}
+                  onMouseLeave={e => e.currentTarget.style.opacity = "1"}
+                >Apply to work with me</a>
+              </Fade>
             </div>
-          </Fade>
-          <Fade delay={80}>
-            <h1 className="serif" style={{ fontSize: "clamp(2.8rem, 5.5vw, 4.5rem)", lineHeight: 1.1, fontWeight: 300, letterSpacing: "-0.01em", marginBottom: "2rem", maxWidth: 620 }}>
-              Serious attention to health, capability, and how you want to live.
-            </h1>
-          </Fade>
-          <Fade delay={120}>
-            <p style={{ fontSize: "0.9rem", letterSpacing: "0.02em", lineHeight: 1.7, color: "var(--faint)", maxWidth: 500, marginBottom: "1.75rem" }}>
-              Olympic Training Center. Air Force Academy. Ranked sixth nationally in judo. Coaching since 2004.
-            </p>
-          </Fade>
-          <Fade delay={160}>
-            <p style={{ fontSize: "1.1rem", lineHeight: 1.85, color: "var(--muted)", maxWidth: 500, marginBottom: "2.5rem" }}>
-              I work privately with people who want to think more clearly about movement, nourishment, recovery, and capability. Together, we sort out what is actually going on and build a physical foundation that holds up in real life.
-            </p>
-          </Fade>
-          <Fade delay={240}>
-            <a href="#apply" style={{
-              display: "inline-flex", alignItems: "center", justifyContent: "center",
-              background: "var(--text)", color: "var(--bg)",
-              padding: "0.8rem 1.6rem", fontSize: "0.82rem", letterSpacing: "0.07em",
-              border: "1px solid var(--text)", borderRadius: "6px", transition: "opacity 0.2s",
-            }}
-              onMouseEnter={e => e.currentTarget.style.opacity = "0.8"}
-              onMouseLeave={e => e.currentTarget.style.opacity = "1"}
-            >Apply to work with me</a>
-          </Fade>
+            <img className="hero-photo" src="/jon-michael.jpg" alt="Jon-Michael Kerestes" />
+          </div>
         </section>
-
-        {/* PERSPECTIVE */}
-        <Fade>
-          <section style={{ borderTop: "1px solid var(--border)", padding: "6rem 0", maxWidth: 620 }}>
-            <p className="serif" style={{ fontSize: "clamp(1.5rem, 2.8vw, 2.1rem)", lineHeight: 1.35, fontWeight: 300, marginBottom: "2.25rem" }}>
-              Most approaches to health do not account for how you actually live. They give you a plan that works on paper and falls apart in practice.
-            </p>
-            <p style={{ color: "var(--muted)", fontSize: "1.05rem", lineHeight: 1.85, maxWidth: 540 }}>
-              I start with what is real for you right now. Your energy, your pain, your schedule, your history, and what you have already tried. Whether you are trying to rebuild something that is not working or take a healthy system to the next level, we find what matters most and build from there.
-            </p>
-          </section>
-        </Fade>
-
-        {/* RECOGNITION */}
-        <section style={{ padding: "1rem 0 6rem", maxWidth: 640 }}>
-          {recognitionLines.map((line, i) => (
-            <Fade key={line} delay={i * 50}>
-              <p className="serif" style={{
-                fontSize: "clamp(1.35rem, 2.4vw, 1.8rem)", lineHeight: 1.3, fontWeight: 300,
-                color: "#2A2820", padding: "1.6rem 0", borderBottom: "1px solid var(--border)",
-              }}>{line}</p>
-            </Fade>
-          ))}
-        </section>
-
-        {/* ORIENTATION */}
-        <Fade>
-          <section style={{ padding: "1rem 0 5rem", maxWidth: 580 }}>
-            <p style={{ color: "var(--muted)", fontSize: "1.05rem", lineHeight: 1.9, marginBottom: "1.25rem" }}>
-              What we work on depends on your situation. It might involve movement, nourishment, recovery, pain, stress, or practical capability. The goal is something useful, sustainable, and grounded in real life, so you can carry it forward on your own.
-            </p>
-            <p style={{ color: "var(--faint)", fontSize: "0.9rem", lineHeight: 1.8 }}>
-              I work with people anywhere in the world, in person or on video.
-            </p>
-          </section>
-        </Fade>
 
         {/* WAYS TO WORK */}
         <Fade>
@@ -286,6 +258,42 @@ export default function JMKLanding() {
                 </div>
               ))}
             </div>
+          </section>
+        </Fade>
+
+        {/* PERSPECTIVE */}
+        <Fade>
+          <section style={{ borderTop: "1px solid var(--border)", padding: "6rem 0", maxWidth: 620 }}>
+            <p className="serif" style={{ fontSize: "clamp(1.5rem, 2.8vw, 2.1rem)", lineHeight: 1.35, fontWeight: 300, marginBottom: "2.25rem" }}>
+              Most approaches to health do not account for how you actually live. They give you a plan that works on paper and falls apart in practice.
+            </p>
+            <p style={{ color: "var(--muted)", fontSize: "1.05rem", lineHeight: 1.85, maxWidth: 540 }}>
+              I start with what is real for you right now. Your energy, your pain, your schedule, your history, and what you have already tried. Whether you are trying to rebuild something that is not working or take a healthy system to the next level, we find what matters most and build from there.
+            </p>
+          </section>
+        </Fade>
+
+        {/* RECOGNITION */}
+        <section style={{ padding: "1rem 0 6rem", maxWidth: 640 }}>
+          {recognitionLines.map((line, i) => (
+            <Fade key={line} delay={i * 50}>
+              <p className="serif" style={{
+                fontSize: "clamp(1.35rem, 2.4vw, 1.8rem)", lineHeight: 1.3, fontWeight: 300,
+                color: "#2A2820", padding: "1.6rem 0", borderBottom: "1px solid var(--border)",
+              }}>{line}</p>
+            </Fade>
+          ))}
+        </section>
+
+        {/* ORIENTATION */}
+        <Fade>
+          <section style={{ padding: "1rem 0 5rem", maxWidth: 580 }}>
+            <p style={{ color: "var(--muted)", fontSize: "1.05rem", lineHeight: 1.9, marginBottom: "1.25rem" }}>
+              What we work on depends on your situation. It might involve movement, nourishment, recovery, pain, stress, or practical capability. The goal is something useful, sustainable, and grounded in real life, so you can carry it forward on your own.
+            </p>
+            <p style={{ color: "var(--faint)", fontSize: "0.9rem", lineHeight: 1.8 }}>
+              I work with people anywhere in the world, in person or on video.
+            </p>
           </section>
         </Fade>
 

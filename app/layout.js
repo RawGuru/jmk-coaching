@@ -1,6 +1,6 @@
 import "./globals.css";
 
-const SITE_URL = "https://jmkerestes.com";
+const SITE_URL = "https://www.jmkerestes.com";
 const DESCRIPTION =
   "Private coaching in movement, nourishment, and recovery. Three years at the Olympic Training Center, Air Force Academy graduate, ranked sixth nationally in judo, coaching since 2004. In person anywhere in the world or on video.";
 
