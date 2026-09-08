@@ -152,7 +152,7 @@ export default function JMKLanding() {
         .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
         a { color: inherit; text-decoration: none; }
         input, textarea { font-family: 'Source Sans 3', sans-serif; font-size: 1rem; }
-        .hero-photo { width: 320px; height: 320px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border); display: block; }
+        .hero-photo { width: 320px; height: 320px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border); display: block; align-self: start; margin-top: 2.5rem; }
         @media (max-width: 820px) {
           .two-col   { grid-template-columns: 1fr !important; gap: 2rem !important; }
           .ways-grid { grid-template-columns: 1fr !important; }
@@ -183,7 +183,7 @@ export default function JMKLanding() {
         </header>
 
         {/* HERO */}
-        <section style={{ padding: "5rem 0 6rem" }}>
+        <section style={{ padding: "2.5rem 0 6rem" }}>
           <div className="hero-grid" style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "4rem", alignItems: "center" }}>
             <div style={{ maxWidth: 620 }}>
               <Fade>
@@ -192,7 +192,7 @@ export default function JMKLanding() {
                 </div>
               </Fade>
               <Fade delay={80}>
-                <h1 className="serif" style={{ fontSize: "clamp(2.8rem, 5.5vw, 4.5rem)", lineHeight: 1.1, fontWeight: 300, letterSpacing: "-0.01em", marginBottom: "2rem", maxWidth: 620 }}>
+                <h1 className="serif" style={{ fontSize: "clamp(2.8rem, 5.5vw, 3.8rem)", lineHeight: 1.1, fontWeight: 300, letterSpacing: "-0.01em", marginBottom: "2rem", maxWidth: 620 }}>
                   Serious attention to health, capability, and how you want to live.
                 </h1>
               </Fade>
