@@ -183,7 +183,7 @@ export default function JMKLanding() {
         </header>
 
         {/* HERO */}
-        <section style={{ padding: "2.5rem 0 6rem" }}>
+        <section style={{ padding: "2.5rem 0 0.75rem" }}>
           <div className="hero-grid" style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "4rem", alignItems: "center" }}>
             <div style={{ maxWidth: 620 }}>
               <Fade>
@@ -224,8 +224,8 @@ export default function JMKLanding() {
 
         {/* WAYS TO WORK */}
         <Fade>
-          <section style={{ borderTop: "1px solid var(--border)", padding: "6rem 0" }}>
-            <h2 className="serif" style={{ fontSize: "clamp(1.7rem, 3vw, 2.4rem)", lineHeight: 1.2, fontWeight: 300, marginBottom: "3rem" }}>
+          <section style={{ borderTop: "1px solid var(--border)", padding: "0.75rem 0 6rem" }}>
+            <h2 className="serif" style={{ fontSize: "clamp(1.7rem, 3vw, 2.4rem)", lineHeight: 1.2, fontWeight: 300, marginBottom: "0.75rem" }}>
               Four ways to work with me
             </h2>
             <div className="ways-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.5rem" }}>
