@@ -1,33 +1,15 @@
 import "./globals.css";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
+import { SITE_URL } from "./lib/meta";
 
-const SITE_URL = "https://www.jmkerestes.com";
 const DESCRIPTION =
-  "Private coaching in movement, nourishment, and recovery. Three years at the Olympic Training Center, Air Force Academy graduate, ranked sixth nationally in judo, coaching since 2004. In person anywhere in the world or on video.";
+  "A thirty-day personal health and body transformation run daily by a former Olympic Training Center resident athlete and Air Force Academy wrestler. In person anywhere, or on video.";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Jon-Michael Kerestes | Physical Integration Coaching",
+  title: "Jon-Michael Kerestes | Thirty Days. I Take Charge of Your Body.",
   description: DESCRIPTION,
-  alternates: {
-    canonical: "/",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  openGraph: {
-    type: "website",
-    url: SITE_URL,
-    title: "Jon-Michael Kerestes | Physical Integration Coaching",
-    description: DESCRIPTION,
-    images: [{ url: "/og-image.jpg" }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Jon-Michael Kerestes | Physical Integration Coaching",
-    description: DESCRIPTION,
-    images: ["/og-image.jpg"],
-  },
 };
 
 const jsonLd = {
@@ -53,7 +35,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {children}
+        <div className="container">
+          <Nav />
+          <main>{children}</main>
+          <Footer />
+        </div>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

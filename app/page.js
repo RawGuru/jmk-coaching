@@ -1,557 +1,129 @@
-"use client";
+import Link from "next/link";
+import Fade from "./components/Fade";
+import { pageMeta } from "./lib/meta";
 
-import { useState, useEffect, useRef } from "react";
+export const metadata = pageMeta({
+  title: "Jon-Michael Kerestes | Thirty Days. I Take Charge of Your Body.",
+  description:
+    "A thirty-day personal health and body transformation run daily by a former Olympic Training Center resident athlete and Air Force Academy wrestler. In person anywhere, or on video.",
+  path: "/",
+});
 
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/xeergpqw";
+const PROOF =
+  "Three years as a resident athlete at the Olympic Training Center. Ranked sixth in the country in judo. Wrestler at the Air Force Academy.";
 
-function useFadeIn() {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
-      { threshold: 0.1 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-  return [ref, visible];
-}
-
-function Fade({ children, delay = 0, style = {} }) {
-  const [ref, visible] = useFadeIn();
-  return (
-    <div ref={ref} style={{
-      opacity: visible ? 1 : 0,
-      transform: visible ? "translateY(0)" : "translateY(12px)",
-      transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms`,
-      ...style,
-    }}>
-      {children}
-    </div>
-  );
-}
-
-const recognitionLines = [
-  "You want to make better use of your body, your habits, and your attention.",
-  "You want to feel stronger and more capable without it taking over your life.",
-  "You want someone who understands how movement, nourishment, and recovery connect.",
-  "You want an approach that is good enough to keep.",
-];
-
-const waysToWork = [
-  {
-    heading: "Ten minutes.",
-    body: "One thing, on video. You talk, I say back what I understand, and you tell me when I've got it. Then I give you my read. The right place to start if you're deciding whether to work with me.",
-    price: "$20",
-    cta: "Book on MYCA",
-    href: "https://myca.live",
-    external: true,
-  },
-  {
-    heading: "One hour on video.",
-    body: "We take your situation apart and you leave with the two or three things that matter most and exactly how to do them.",
-    price: "$200",
-    cta: "Request a time",
-    href: "#apply",
-    external: false,
-  },
-  {
-    heading: "One day in person.",
-    body: "Anywhere in the world, or you come to me. Movement, training, and recovery handled hands-on, inside your actual life.",
-    price: "$1,500 plus travel",
-    cta: "Request a day",
-    href: "#apply",
-    external: false,
-  },
-  {
-    heading: "Three months, private.",
-    body: "Weekly sessions on video, direct access between them, and one or more days in person as needed. For people who want the whole structure rebuilt.",
-    price: "$3,000, by application",
-    cta: "Apply",
-    href: "#apply",
-    external: false,
-  },
-];
-
-const applyOptions = ["One hour on video", "One day in person", "Three months private"];
-
-// required: true = required field, false = optional
-const formFields = [
-  {
-    id: "workTogether",
-    label: "How would you like to work together?",
-    type: "radio",
-    options: ["Virtual", "Pittsburgh", "Elsewhere / Destination"],
-    required: true
-  },
-  {
-    id: "question1",
-    label: "What feels hardest to get right in your body or day-to-day life right now, and what is it getting in the way of?",
-    helper: "What are you no longer doing that you used to do, or wish you could be doing?",
-    required: true
-  },
-  {
-    id: "question2",
-    label: "What have you tried that helped, even partially, and why do you think it did not hold?",
-    helper: "Tell me what actually helped, even if it only worked for a while.",
-    required: true
-  },
-  {
-    id: "question3",
-    label: "If we were to build something practical, honest, and grounded in your real life, what makes right now the moment to do it?",
-    helper: "Why now?",
-    required: true
-  },
-];
-
-const emptyForm = {
-  applyingFor: "",
-  name: "", email: "",
-  ...Object.fromEntries(formFields.map(f => [f.id, ""]))
-};
-
-export default function JMKLanding() {
-  const [form, setForm]     = useState(emptyForm);
-  const [status, setStatus] = useState("idle");
-  const successRef = useRef(null);
-
-  useEffect(() => {
-    if (status === "success" && successRef.current) {
-      successRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, [status]);
-
-  const handleChange = (e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus("sending");
-    try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(form),
-      });
-      setStatus(res.ok ? "success" : "error");
-    } catch { setStatus("error"); }
-  };
+export default function Home() {
+  const videoUrl = process.env.NEXT_PUBLIC_VIDEO_URL;
 
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Source+Sans+3:wght@300;400;500&display=swap');
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        :root {
-          --bg: #F5F1E8; --bg-card: #EDE5D4; --text: #1F1F1B;
-          --muted: #5B584F; --faint: #6B685F; --olive: #6E7462;
-          --clay: #A56A43; --border: #DDD6C8; --border-input: #C4BAA8;
-        }
-        html { font-size: 18px; scroll-behavior: smooth; }
-        body { background: var(--bg); color: var(--text); font-family: 'Source Sans 3', sans-serif; -webkit-font-smoothing: antialiased; }
-        .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
-        a { color: inherit; text-decoration: none; }
-        input, textarea { font-family: 'Source Sans 3', sans-serif; font-size: 1rem; }
-        .hero-photo { width: 320px; height: 320px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border); display: block; align-self: start; margin-top: 2.5rem; }
-        @media (max-width: 820px) {
-          .two-col   { grid-template-columns: 1fr !important; gap: 2rem !important; }
-          .ways-grid { grid-template-columns: 1fr !important; }
-          .two-input { grid-template-columns: 1fr !important; }
-          .site-nav  { gap: 1.5rem !important; }
-          .apply-pad { padding: 2.5rem 1.75rem !important; }
-          .hero-grid { grid-template-columns: 1fr !important; }
-          .hero-photo { width: 160px !important; height: 160px !important; margin: 0 auto; order: -1; }
-        }
-      `}</style>
-
-      <div style={{ maxWidth: 1080, margin: "0 auto", padding: "0 2rem" }}>
-
-        {/* NAV */}
-        <header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.75rem 0", borderBottom: "1px solid var(--border)" }}>
-          <div style={{ fontSize: "0.78rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--text)", fontWeight: 500 }}>
-            Jon-Michael Kerestes
-          </div>
-          <nav className="site-nav" style={{ display: "flex", gap: "2.5rem", fontSize: "0.78rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--muted)" }}>
-            {[["#about", "About"], ["#apply", "Apply"]].map(([href, label]) => (
-              <a key={href} href={href}
-                onMouseEnter={e => e.target.style.color = "var(--text)"}
-                onMouseLeave={e => e.target.style.color = "var(--muted)"}
-                style={{ transition: "color 0.2s" }}
-              >{label}</a>
-            ))}
-          </nav>
-        </header>
-
-        {/* HERO */}
-        <section style={{ padding: "2.5rem 0 0.75rem" }}>
-          <div className="hero-grid" style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "4rem", alignItems: "center" }}>
-            <div style={{ maxWidth: 620 }}>
-              <Fade>
-                <div style={{ fontSize: "0.72rem", letterSpacing: "0.24em", textTransform: "uppercase", color: "var(--olive)", marginBottom: "2rem" }}>
-                  Physical Integration
-                </div>
-              </Fade>
-              <Fade delay={80}>
-                <h1 className="serif" style={{ fontSize: "clamp(2.8rem, 5.5vw, 3.8rem)", lineHeight: 1.1, fontWeight: 300, letterSpacing: "-0.01em", marginBottom: "2rem", maxWidth: 620 }}>
-                  Serious attention to health, capability, and how you want to live.
-                </h1>
-              </Fade>
-              <Fade delay={120}>
-                <p style={{ fontSize: "0.9rem", letterSpacing: "0.02em", lineHeight: 1.7, color: "var(--faint)", maxWidth: 500, marginBottom: "1.75rem" }}>
-                  Olympic Training Center. Air Force Academy. Ranked sixth nationally in judo. Coaching since 2004.
-                </p>
-              </Fade>
-              <Fade delay={160}>
-                <p style={{ fontSize: "1.1rem", lineHeight: 1.85, color: "var(--muted)", maxWidth: 500, marginBottom: "2.5rem" }}>
-                  I work privately with people who want to think more clearly about movement, nourishment, recovery, and capability. Together, we sort out what is actually going on and build a physical foundation that holds up in real life.
-                </p>
-              </Fade>
-              <Fade delay={240}>
-                <a href="#apply" style={{
-                  display: "inline-flex", alignItems: "center", justifyContent: "center",
-                  background: "var(--text)", color: "var(--bg)",
-                  padding: "0.8rem 1.6rem", fontSize: "0.82rem", letterSpacing: "0.07em",
-                  border: "1px solid var(--text)", borderRadius: "6px", transition: "opacity 0.2s",
-                }}
-                  onMouseEnter={e => e.currentTarget.style.opacity = "0.8"}
-                  onMouseLeave={e => e.currentTarget.style.opacity = "1"}
-                >Apply to work with me</a>
-              </Fade>
-            </div>
-            <img className="hero-photo" src="/jon-michael.jpg" alt="Jon-Michael Kerestes" />
-          </div>
-        </section>
-
-        {/* WAYS TO WORK */}
-        <Fade>
-          <section style={{ borderTop: "1px solid var(--border)", padding: "0.75rem 0 6rem" }}>
-            <h2 className="serif" style={{ fontSize: "clamp(1.7rem, 3vw, 2.4rem)", lineHeight: 1.2, fontWeight: 300, marginBottom: "0.75rem" }}>
-              Four ways to work with me
-            </h2>
-            <div className="ways-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.5rem" }}>
-              {waysToWork.map((card) => (
-                <div key={card.heading} style={{
-                  background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "10px",
-                  padding: "2.25rem 2rem", display: "flex", flexDirection: "column",
-                }}>
-                  <h3 className="serif" style={{ fontSize: "clamp(1.3rem, 2.2vw, 1.65rem)", lineHeight: 1.25, fontWeight: 400, marginBottom: "1rem" }}>
-                    {card.heading}
-                  </h3>
-                  <p style={{ color: "var(--muted)", fontSize: "1rem", lineHeight: 1.8, marginBottom: "1.75rem", flexGrow: 1 }}>
-                    {card.body}
-                  </p>
-                  <div style={{ fontSize: "0.9rem", letterSpacing: "0.02em", color: "var(--clay)", marginBottom: "1.5rem" }}>
-                    {card.price}
-                  </div>
-                  <a
-                    href={card.href}
-                    {...(card.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    style={{
-                      display: "inline-flex", alignItems: "center", justifyContent: "center", alignSelf: "flex-start",
-                      background: "var(--text)", color: "var(--bg)",
-                      padding: "0.7rem 1.4rem", fontSize: "0.8rem", letterSpacing: "0.07em",
-                      border: "1px solid var(--text)", borderRadius: "6px", transition: "opacity 0.2s",
-                    }}
-                    onMouseEnter={e => e.currentTarget.style.opacity = "0.8"}
-                    onMouseLeave={e => e.currentTarget.style.opacity = "1"}
-                  >{card.cta}</a>
-                </div>
-              ))}
-            </div>
-          </section>
-        </Fade>
-
-        {/* PERSPECTIVE */}
-        <Fade>
-          <section style={{ borderTop: "1px solid var(--border)", padding: "6rem 0", maxWidth: 620 }}>
-            <p className="serif" style={{ fontSize: "clamp(1.5rem, 2.8vw, 2.1rem)", lineHeight: 1.35, fontWeight: 300, marginBottom: "2.25rem" }}>
-              Most approaches to health do not account for how you actually live. They give you a plan that works on paper and falls apart in practice.
-            </p>
-            <p style={{ color: "var(--muted)", fontSize: "1.05rem", lineHeight: 1.85, maxWidth: 540 }}>
-              I start with what is real for you right now. Your energy, your pain, your schedule, your history, and what you have already tried. Whether you are trying to rebuild something that is not working or take a healthy system to the next level, we find what matters most and build from there.
-            </p>
-          </section>
-        </Fade>
-
-        {/* RECOGNITION */}
-        <section style={{ padding: "1rem 0 6rem", maxWidth: 640 }}>
-          {recognitionLines.map((line, i) => (
-            <Fade key={line} delay={i * 50}>
-              <p className="serif" style={{
-                fontSize: "clamp(1.35rem, 2.4vw, 1.8rem)", lineHeight: 1.3, fontWeight: 300,
-                color: "#2A2820", padding: "1.6rem 0", borderBottom: "1px solid var(--border)",
-              }}>{line}</p>
+      {/* SECTION 1 — first screen */}
+      <section className="section-first">
+        <div className="hero-grid">
+          <div className="measure">
+            <Fade>
+              <div className="eyebrow">Physical Integration</div>
             </Fade>
-          ))}
+            <Fade delay={80}>
+              <h1 className="title serif" style={{ marginBottom: "1.75rem" }}>
+                Thirty days. I take charge of your body.
+              </h1>
+            </Fade>
+            <Fade delay={140}>
+              <p className="lead" style={{ marginBottom: "1.75rem" }}>
+                You tell me what you want to be different and by when. For thirty days I run your
+                training, your food, your sleep, and your recovery, adjusting every day from your
+                numbers, and you see the change on the scale, in your blood pressure and resting
+                heart rate, in the mirror, and in how you move. You bring the reason. I bring the
+                plan and the judgment.
+              </p>
+            </Fade>
+            <Fade delay={200}>
+              <p className="proof" style={{ marginBottom: "2.25rem" }}>{PROOF}</p>
+            </Fade>
+            <Fade delay={260}>
+              <Link href="/apply" className="btn">Apply for the thirty days</Link>
+            </Fade>
+          </div>
+          <img className="hero-photo" src="/jon-michael.jpg" alt="Jon-Michael Kerestes" />
+        </div>
+      </section>
+
+      {/* SECTION 2 — video, only when configured */}
+      {videoUrl && (
+        <Fade>
+          <section className="section">
+            <h2 className="h2 serif measure">Watch how I think about one person&rsquo;s problem.</h2>
+            <div className="embed">
+              <iframe
+                src={videoUrl}
+                title="Watch how I think about one person's problem"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </section>
+        </Fade>
+      )}
+
+      {/* SECTION 3 — who this is for */}
+      <Fade>
+        <section className="section">
+          <h2 className="h2 serif" style={{ marginBottom: "1.75rem" }}>Who this is for.</h2>
+          <p className="body-text measure">
+            A wedding in eight weeks. A number from your doctor you did not expect. A body you no
+            longer recognize after building a company. The wish to hand the whole thing to one
+            person who knows what he is doing and simply do what he says. Different reasons, same
+            month.
+          </p>
         </section>
+      </Fade>
 
-        {/* ORIENTATION */}
-        <Fade>
-          <section style={{ padding: "1rem 0 5rem", maxWidth: 580 }}>
-            <p style={{ color: "var(--muted)", fontSize: "1.05rem", lineHeight: 1.9, marginBottom: "1.25rem" }}>
-              What we work on depends on your situation. It might involve movement, nourishment, recovery, pain, stress, or practical capability. The goal is something useful, sustainable, and grounded in real life, so you can carry it forward on your own.
-            </p>
-            <p style={{ color: "var(--faint)", fontSize: "0.9rem", lineHeight: 1.8 }}>
-              I work with people anywhere in the world, in person or on video.
-            </p>
-          </section>
-        </Fade>
+      {/* SECTION 4 — what happens */}
+      <Fade>
+        <section className="section">
+          <h2 className="h2 serif" style={{ marginBottom: "1.75rem" }}>What happens.</h2>
+          <p className="body-text measure">
+            Day one, we meet for an hour and I build your plan from what you want, your history, and
+            your numbers. Every morning you send your weight, sleep, resting heart rate, and photos
+            of what you ate, and every morning you get back exactly what changes today. Twice a week
+            we talk for twenty-five minutes. Every Friday you get a written review of the week. Day
+            thirty, we look at the numbers side by side and decide together whether you continue with
+            me on a lighter footing.
+          </p>
+        </section>
+      </Fade>
 
-        {/* APPLY */}
-        <Fade>
-          <section id="apply" style={{ padding: "0 0 7rem" }}>
-            <div className="apply-pad" style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "10px", padding: "4rem 3.5rem" }}>
-              {status === "success" ? (
-                <div ref={successRef} style={{
-                  maxWidth: 540,
-                  paddingTop: "0.5rem"
-                }}>
-                  <div style={{
-                    borderLeft: "3px solid var(--clay)",
-                    paddingLeft: "1.75rem",
-                    paddingTop: "1rem",
-                    paddingBottom: "3rem"
-                  }}>
-                    <div style={{
-                      fontSize: "0.72rem",
-                      letterSpacing: "0.22em",
-                      textTransform: "uppercase",
-                      color: "var(--clay)",
-                      marginBottom: "1.5rem"
-                    }}>
-                      Confirmed
-                    </div>
-                    <p className="serif" style={{
-                      fontSize: "clamp(2rem, 3.5vw, 2.5rem)",
-                      fontWeight: 300,
-                      lineHeight: 1.2,
-                      color: "var(--text)",
-                      marginBottom: "1.5rem"
-                    }}>
-                      Application received.
-                    </p>
-                    <p style={{
-                      color: "var(--muted)",
-                      fontSize: "1.1rem",
-                      lineHeight: 1.8,
-                      marginBottom: "1.25rem"
-                    }}>
-                      Thank you. I received your application and will review it personally.
-                    </p>
-                    <p style={{
-                      color: "var(--faint)",
-                      fontSize: "1rem",
-                      lineHeight: 1.7
-                    }}>
-                      If it looks like a fit, I will reach out with next steps.
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                <>
-                  <div style={{ maxWidth: 540, marginBottom: "3rem" }}>
-                    <div style={{ fontSize: "0.72rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--olive)", marginBottom: "1.25rem" }}>
-                      Apply to work with me
-                    </div>
-                    <h2 className="serif" style={{ fontSize: "clamp(1.7rem, 3vw, 2.4rem)", lineHeight: 1.2, fontWeight: 300 }}>
-                      I read every application personally before responding. Answer honestly and simply. That is what helps me understand whether I can actually help.
-                    </h2>
-                  </div>
-                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.5rem", maxWidth: 660 }}>
-
-                  {/* which option are you applying for */}
-                  <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-                    <label style={{ fontSize: "0.78rem", color: "var(--muted)", letterSpacing: "0.04em" }}>
-                      Which option are you applying for?
-                    </label>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.65rem" }}>
-                      {applyOptions.map(option => {
-                        const isSelected = form.applyingFor === option;
-                        return (
-                          <label
-                            key={option}
-                            style={{
-                              display: "inline-flex", alignItems: "center", cursor: "pointer",
-                              padding: "0.5rem 1rem", fontSize: "0.85rem",
-                              color: isSelected ? "var(--text)" : "var(--muted)",
-                              background: isSelected ? "#FAF7F0" : "transparent",
-                              border: `1px solid ${isSelected ? "var(--border-input)" : "var(--border)"}`,
-                              borderRadius: "4px", transition: "all 0.2s ease",
-                            }}
-                            onMouseEnter={(e) => {
-                              if (!isSelected) {
-                                e.currentTarget.style.borderColor = "var(--border-input)";
-                                e.currentTarget.style.background = "#FDFCFA";
-                              }
-                            }}
-                            onMouseLeave={(e) => {
-                              if (!isSelected) {
-                                e.currentTarget.style.borderColor = "var(--border)";
-                                e.currentTarget.style.background = "transparent";
-                              }
-                            }}
-                          >
-                            <input
-                              type="radio"
-                              name="applyingFor"
-                              value={option}
-                              checked={isSelected}
-                              onChange={handleChange}
-                              required
-                              style={{ position: "absolute", opacity: 0, pointerEvents: "none" }}
-                            />
-                            {option}
-                          </label>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* name + email */}
-                  <div className="two-input" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
-                    {[["name","Name","Your name","text",true],["email","Email","you@example.com","email",true]].map(([id,label,ph,type,req]) => (
-                      <label key={id} style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-                        <span style={{ fontSize: "0.78rem", color: "var(--muted)", letterSpacing: "0.04em" }}>{label}</span>
-                        <input name={id} type={type} placeholder={ph} value={form[id]} onChange={handleChange} required={req}
-                          style={{ background: "#FAF7F0", border: "1px solid var(--border-input)", borderRadius: "4px", padding: "0.75rem 1rem", color: "var(--text)", outline: "none", width: "100%" }} />
-                      </label>
-                    ))}
-                  </div>
-
-                  {/* open-ended fields */}
-                  {formFields.map(field => (
-                    <div key={field.id} style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-                      <label style={{ fontSize: "0.78rem", color: "var(--muted)", letterSpacing: "0.04em" }}>
-                        {field.label}
-                        {!field.required && <span style={{ color: "var(--faint)" }}> (optional)</span>}
-                      </label>
-                      {field.helper && (
-                        <p style={{ fontSize: "0.75rem", color: "var(--faint)", marginTop: "-0.25rem", marginBottom: "0.25rem" }}>
-                          {field.helper}
-                        </p>
-                      )}
-                      {field.type === "radio" ? (
-                        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.65rem" }}>
-                          {field.options.map(option => {
-                            const isSelected = form[field.id] === option;
-                            return (
-                              <label
-                                key={option}
-                                style={{
-                                  display: "inline-flex",
-                                  alignItems: "center",
-                                  cursor: "pointer",
-                                  padding: "0.5rem 1rem",
-                                  fontSize: "0.85rem",
-                                  color: isSelected ? "var(--text)" : "var(--muted)",
-                                  background: isSelected ? "#FAF7F0" : "transparent",
-                                  border: `1px solid ${isSelected ? "var(--border-input)" : "var(--border)"}`,
-                                  borderRadius: "4px",
-                                  transition: "all 0.2s ease",
-                                }}
-                                onMouseEnter={(e) => {
-                                  if (!isSelected) {
-                                    e.currentTarget.style.borderColor = "var(--border-input)";
-                                    e.currentTarget.style.background = "#FDFCFA";
-                                  }
-                                }}
-                                onMouseLeave={(e) => {
-                                  if (!isSelected) {
-                                    e.currentTarget.style.borderColor = "var(--border)";
-                                    e.currentTarget.style.background = "transparent";
-                                  }
-                                }}
-                              >
-                                <input
-                                  type="radio"
-                                  name={field.id}
-                                  value={option}
-                                  checked={isSelected}
-                                  onChange={handleChange}
-                                  required={field.required}
-                                  style={{ position: "absolute", opacity: 0, pointerEvents: "none" }}
-                                />
-                                {option}
-                              </label>
-                            );
-                          })}
-                        </div>
-                      ) : (
-                        <textarea
-                          name={field.id}
-                          rows={3}
-                          placeholder="Write here"
-                          value={form[field.id]}
-                          onChange={handleChange}
-                          required={field.required}
-                          style={{ background: "#FAF7F0", border: "1px solid var(--border-input)", borderRadius: "4px", padding: "0.75rem 1rem", color: "var(--text)", outline: "none", resize: "vertical", width: "100%" }}
-                        />
-                      )}
-                    </div>
-                  ))}
-
-                  <div style={{ paddingTop: "0.5rem" }}>
-                    <button type="submit" disabled={status === "sending"}
-                      style={{
-                        background: "var(--text)", color: "var(--bg)", border: "1px solid var(--text)", borderRadius: "6px",
-                        padding: "0.85rem 1.75rem", fontSize: "0.82rem", letterSpacing: "0.07em",
-                        cursor: status === "sending" ? "not-allowed" : "pointer",
-                        opacity: status === "sending" ? 0.6 : 1, transition: "opacity 0.2s",
-                      }}
-                      onMouseEnter={e => { if (status !== "sending") e.currentTarget.style.opacity = "0.8"; }}
-                      onMouseLeave={e => { if (status !== "sending") e.currentTarget.style.opacity = "1"; }}
-                    >{status === "sending" ? "Sending..." : "Submit application"}</button>
-                    {status === "error" && (
-                      <p style={{ marginTop: "1rem", color: "var(--clay)", fontSize: "0.88rem" }}>Something went wrong. Please try again or reach out directly.</p>
-                    )}
-                    <p style={{ marginTop: "1.25rem", fontSize: "0.78rem", color: "var(--faint)" }}>I work with a limited number of people and respond personally.</p>
-                  </div>
-                </form>
-                </>
-              )}
+      {/* SECTION 5 — where this comes from */}
+      <Fade>
+        <section className="section">
+          <div className="split">
+            <img className="about-photo" src="/jon-michael.jpg" alt="Jon-Michael Kerestes" />
+            <div>
+              <h2 className="h2 serif" style={{ marginBottom: "1.75rem" }}>Where this comes from.</h2>
+              <p className="body-text">
+                I spent three years as a resident athlete at the Olympic Training Center in Colorado
+                Springs and was ranked sixth in the country in judo. I wrestled at the Air Force
+                Academy and served as an Air Force captain. I have coached since 2004. Since then I
+                have trained several years of jiu-jitsu and kept studying strength, speed, nutrition,
+                the mechanics of boxing and sprinting, and how people actually change. Everything I do
+                with a client comes from having run a body at the highest level anyone runs one, and
+                from twenty years of watching what makes a change hold.
+              </p>
             </div>
-          </section>
-        </Fade>
+          </div>
+        </section>
+      </Fade>
 
-        {/* Future sections can be added here:
-            - "How this starts" section
-            - Proof / testimonial blocks
-            - Separate Pittsburgh and virtual pathways
-        */}
-
-        {/* ABOUT */}
-        <Fade>
-          <section id="about" style={{ borderTop: "1px solid var(--border)", padding: "6rem 0 8rem" }}>
-            <div className="two-col" style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "4rem", alignItems: "start" }}>
-              <div>
-                <div style={{ fontSize: "0.72rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--olive)", marginBottom: "1.75rem" }}>About</div>
-                <img
-                  src="/jon-michael.jpg"
-                  alt="Jon-Michael Kerestes"
-                  style={{ width: "100%", aspectRatio: "1/1", objectFit: "cover", borderRadius: "50%", display: "block" }}
-                />
-              </div>
-              <div style={{ maxWidth: 520 }}>
-                <p className="serif" style={{ fontSize: "clamp(1.4rem, 2.4vw, 1.85rem)", lineHeight: 1.45, fontWeight: 300, marginBottom: "2rem" }}>
-                  I spent three years training at the Olympic Training Center in Colorado Springs, graduated from the Air Force Academy, and was ranked sixth nationally in judo. I served as an Air Force Captain. I have been coaching since 2004 and studying how people actually change the entire time.
-                </p>
-                <p style={{ color: "var(--muted)", fontSize: "1.05rem", lineHeight: 1.85, marginBottom: "1.5rem" }}>
-                  That background gave me a specific lens. Movement, nourishment, and recovery are part of the structure your life runs on. When that structure is working well, everything else gets easier.
-                </p>
-                <p style={{ color: "var(--muted)", fontSize: "1.05rem", lineHeight: 1.85 }}>
-                  I help people find forms of care that are effective, enjoyable, and sustainable.
-                </p>
-              </div>
-            </div>
-          </section>
-        </Fade>
-
-        {/* FOOTER */}
-        <footer style={{ borderTop: "1px solid var(--border)", padding: "2.25rem 0", display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
-          <div style={{ fontSize: "0.72rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--faint)" }}>Jon-Michael Kerestes</div>
-        </footer>
-
-      </div>
+      {/* SECTION 6 — self-defense crosslink + button */}
+      <Fade>
+        <section className="section">
+          <p className="crosslink" style={{ marginBottom: "2rem" }}>
+            Also: <Link href="/self-defense">thirty days from nothing to able to protect yourself.</Link>
+          </p>
+          <Link href="/apply" className="btn">Apply for the thirty days</Link>
+        </section>
+      </Fade>
     </>
   );
 }
