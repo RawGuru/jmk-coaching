@@ -27,7 +27,7 @@ export default function Group() {
             </a>
           ) : (
             <p className="body-text">
-              Your application is in. You will hear from me within a day with your seat.
+              The next group opens when ten seats are filled. Your application holds one.
             </p>
           )}
         </div>
