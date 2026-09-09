@@ -3,9 +3,9 @@ import Fade from "./components/Fade";
 import { pageMeta } from "./lib/meta";
 
 export const metadata = pageMeta({
-  title: "Jon-Michael Kerestes | Thirty Days. I Take Charge of Your Body.",
+  title: "Jon-Michael Kerestes | Thirty Days. Your Body, Back Under Your Own Command.",
   description:
-    "A thirty-day personal health and body transformation run daily by a former Olympic Training Center resident athlete and Air Force Academy wrestler. In person anywhere, or on video.",
+    "A thirty-day program that puts your health back in your own hands, read daily by a former Olympic Training Center resident athlete and Air Force Academy wrestler. Four people at a time. In person anywhere, or on video.",
   path: "/",
 });
 
@@ -26,16 +26,16 @@ export default function Home() {
             </Fade>
             <Fade delay={80}>
               <h1 className="title serif" style={{ marginBottom: "1.75rem" }}>
-                Thirty days. I take charge of your body.
+                Thirty days. Your body, back under your own command.
               </h1>
             </Fade>
             <Fade delay={140}>
               <p className="lead" style={{ marginBottom: "1.75rem" }}>
-                You tell me what you want to be different and by when. For thirty days I run your
-                training, your food, your sleep, and your recovery, adjusting every day from your
-                numbers, and you see the change on the scale, in your blood pressure and resting
-                heart rate, in the mirror, and in how you move. You bring the reason. I bring the
-                plan and the judgment.
+                You tell me what you want to be different and by when. Every morning for thirty days I
+                read your numbers and tell you the one thing that changes today. You do it. By day
+                thirty the scale, your blood pressure, your resting heart rate, and the mirror have
+                moved, and you know why each one moved, so it stays yours after the month ends. I take
+                four people at a time.
               </p>
             </Fade>
             <Fade delay={200}>

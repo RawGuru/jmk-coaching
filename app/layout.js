@@ -4,11 +4,11 @@ import Footer from "./components/Footer";
 import { SITE_URL } from "./lib/meta";
 
 const DESCRIPTION =
-  "A thirty-day personal health and body transformation run daily by a former Olympic Training Center resident athlete and Air Force Academy wrestler. In person anywhere, or on video.";
+  "A thirty-day program that puts your health back in your own hands, read daily by a former Olympic Training Center resident athlete and Air Force Academy wrestler. Four people at a time. In person anywhere, or on video.";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Jon-Michael Kerestes | Thirty Days. I Take Charge of Your Body.",
+  title: "Jon-Michael Kerestes | Thirty Days. Your Body, Back Under Your Own Command.",
   description: DESCRIPTION,
 };
 
