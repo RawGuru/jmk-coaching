@@ -2,31 +2,24 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { track } from "@vercel/analytics";
 import { FORMSPREE_ENDPOINT } from "../lib/meta";
 
-const PROGRAMS = ["Thirty days, my body", "Thirty days, self-defense"];
-const BUDGETS = ["Under $500", "$500 to $3,000", "$3,000 to $10,000", "Whatever it takes"];
-
-const QUESTIONS = [
-  { id: "goal", label: "What do you want to be different thirty days from now?", required: true },
-  { id: "driving", label: "What is driving this right now?", required: true },
-  { id: "tried", label: "What have you already tried?", required: true },
-  { id: "date", label: "Is there a date that matters?", required: false },
+const PROGRAMS = [
+  { value: "Private coaching", param: "private", consent: "I understand the private month is $10,000." },
+  { value: "Self-defense", param: "self-defense", consent: "I understand the self-defense month is $15,000 plus travel." },
 ];
 
-function destination(program, budget) {
-  if (program === "Thirty days, self-defense") return "/call";
-  if (budget === "$3,000 to $10,000" || budget === "Whatever it takes") return "/call";
-  if (budget === "$500 to $3,000") return "/group";
-  if (budget === "Under $500") return "/self-run";
-  return "/call";
-}
+const QUESTIONS = [
+  { id: "goal", label: "What do you want to be different, and by when?" },
+  { id: "driving", label: "What is driving this right now?" },
+];
 
 const empty = {
-  name: "", email: "", phone: "",
-  program: PROGRAMS[0],
-  goal: "", driving: "", tried: "", date: "",
-  budget: "",
+  name: "", email: "",
+  program: PROGRAMS[0].value,
+  goal: "", driving: "",
+  consent: false,
 };
 
 export default function ApplyForm() {
@@ -34,16 +27,15 @@ export default function ApplyForm() {
   const [form, setForm] = useState(empty);
   const [status, setStatus] = useState("idle");
 
-  // Preselect program from ?program= query param (self-defense).
+  // Preselect program from ?program= query param.
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("program") === "self-defense") {
-      setForm((prev) => ({ ...prev, program: "Thirty days, self-defense" }));
-    }
+    const param = new URLSearchParams(window.location.search).get("program");
+    const match = PROGRAMS.find((p) => p.param === param);
+    if (match) setForm((prev) => ({ ...prev, program: match.value }));
   }, []);
 
   const set = (k, v) => setForm((prev) => ({ ...prev, [k]: v }));
-  const handleChange = (e) => set(e.target.name, e.target.value);
+  const current = PROGRAMS.find((p) => p.value === form.program) || PROGRAMS[0];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,10 +44,18 @@ export default function ApplyForm() {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          program: form.program,
+          goal: form.goal,
+          driving: form.driving,
+          consent: current.consent,
+        }),
       });
       if (res.ok) {
-        router.push(destination(form.program, form.budget));
+        track("application", { program: form.program });
+        router.push("/call");
       } else {
         setStatus("error");
       }
@@ -65,67 +65,51 @@ export default function ApplyForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form">
+    <form onSubmit={handleSubmit} className="form" action={FORMSPREE_ENDPOINT} method="POST">
       {/* name + email */}
       <div className="two-input">
-        <label className="field">
-          <span className="field-label">Name</span>
-          <input className="input" name="name" type="text" placeholder="Your name"
-            value={form.name} onChange={handleChange} required />
-        </label>
-        <label className="field">
-          <span className="field-label">Email</span>
-          <input className="input" name="email" type="email" placeholder="you@example.com"
-            value={form.email} onChange={handleChange} required />
-        </label>
+        <div className="field">
+          <label className="field-label" htmlFor="name">Name</label>
+          <input className="input" id="name" name="name" type="text" placeholder="Your name"
+            value={form.name} onChange={(e) => set("name", e.target.value)} required />
+        </div>
+        <div className="field">
+          <label className="field-label" htmlFor="email">Email</label>
+          <input className="input" id="email" name="email" type="email" placeholder="you@example.com"
+            value={form.email} onChange={(e) => set("email", e.target.value)} required />
+        </div>
       </div>
 
-      {/* phone */}
-      <label className="field">
-        <span className="field-label">Phone</span>
-        <input className="input" name="phone" type="tel" placeholder="Your phone number"
-          value={form.phone} onChange={handleChange} required />
-      </label>
-
       {/* program */}
-      <div className="field">
-        <span className="field-label">Which program?</span>
+      <fieldset className="field" style={{ border: 0 }}>
+        <legend className="field-label" style={{ marginBottom: "0.5rem" }}>Which program?</legend>
         <div className="chips">
           {PROGRAMS.map((p) => (
-            <label key={p} className={`chip${form.program === p ? " sel" : ""}`}>
-              <input type="radio" name="program" value={p}
-                checked={form.program === p} onChange={handleChange} required
-                style={{ position: "absolute", opacity: 0, pointerEvents: "none" }} />
-              {p}
+            <label key={p.value} className={`chip${form.program === p.value ? " sel" : ""}`}>
+              <input type="radio" name="program" value={p.value} className="visually-hidden"
+                checked={form.program === p.value} onChange={(e) => set("program", e.target.value)} required />
+              {p.value}
             </label>
           ))}
         </div>
-      </div>
+      </fieldset>
 
       {/* open questions */}
       {QUESTIONS.map((q) => (
         <div key={q.id} className="field">
-          <label className="field-label">
-            {q.label}{!q.required && <span style={{ color: "var(--faint)" }}> (optional)</span>}
-          </label>
-          <textarea className="input" name={q.id} rows={3} placeholder="Write here"
-            value={form[q.id]} onChange={handleChange} required={q.required} />
+          <label className="field-label" htmlFor={q.id}>{q.label}</label>
+          <textarea className="input" id={q.id} name={q.id} rows={3} placeholder="Write here"
+            value={form[q.id]} onChange={(e) => set(q.id, e.target.value)} required />
         </div>
       ))}
 
-      {/* budget */}
+      {/* consent */}
       <div className="field">
-        <span className="field-label">What are you prepared to invest to solve this in the next thirty days?</span>
-        <div className="chips">
-          {BUDGETS.map((b) => (
-            <label key={b} className={`chip${form.budget === b ? " sel" : ""}`}>
-              <input type="radio" name="budget" value={b}
-                checked={form.budget === b} onChange={handleChange} required
-                style={{ position: "absolute", opacity: 0, pointerEvents: "none" }} />
-              {b}
-            </label>
-          ))}
-        </div>
+        <label className="consent">
+          <input type="checkbox" name="consent" value={current.consent}
+            checked={form.consent} onChange={(e) => set("consent", e.target.checked)} required />
+          <span>{current.consent}</span>
+        </label>
       </div>
 
       <div style={{ paddingTop: "0.5rem" }}>

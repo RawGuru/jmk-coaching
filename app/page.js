@@ -3,14 +3,14 @@ import Fade from "./components/Fade";
 import { pageMeta } from "./lib/meta";
 
 export const metadata = pageMeta({
-  title: "Jon-Michael Kerestes | Thirty Days. Your Body, Back Under Your Own Command.",
+  title: "Jon-Michael Kerestes | Thirty-Day Private Coaching. You Choose the Result.",
   description:
-    "A thirty-day program that puts your health back in your own hands, read daily by a former Olympic Training Center resident athlete and Air Force Academy wrestler. Four people at a time. In person anywhere, or on video.",
+    "Thirty days of private coaching. You choose what to change and by when; each morning he reads the few numbers that matter for your goal and tells you what to keep, change, and watch. Former Olympic Training Center resident athlete, ranked sixth in the country in judo. Four people at a time. In person anywhere, or on video.",
   path: "/",
 });
 
 const PROOF =
-  "Three years as a resident athlete at the Olympic Training Center. Ranked sixth in the country in judo. Wrestler at the Air Force Academy.";
+  "Three years as a resident athlete at the Olympic Training Center. Ranked sixth in the country in judo. Wrestler at the Air Force Academy. Coaching since 2004.";
 
 export default function Home() {
   const videoUrl = process.env.NEXT_PUBLIC_VIDEO_URL;
@@ -22,24 +22,26 @@ export default function Home() {
         <div className="hero-grid">
           <div className="measure">
             <Fade>
-              <div className="eyebrow">Physical Integration</div>
+              <div className="eyebrow">Thirty-day private coaching</div>
             </Fade>
             <Fade delay={80}>
               <h1 className="title serif" style={{ marginBottom: "1.75rem" }}>
-                Thirty days. Your body, back under your own command.
+                Thirty days. You choose the result. I adjust the plan every morning.
               </h1>
             </Fade>
             <Fade delay={140}>
               <p className="lead" style={{ marginBottom: "1.75rem" }}>
-                You tell me what you want to be different and by when. Every morning for thirty days I
-                read your numbers and tell you the one thing that changes today. You do it. By day
-                thirty the scale, your blood pressure, your resting heart rate, and the mirror have
-                moved, and you know why each one moved, so it stays yours after the month ends. I take
-                four people at a time.
+                Tell me what you want to change and by when. Each morning you send me the two or three
+                things we agreed matter for your goal, which takes about two minutes. I read them and
+                tell you what to keep, what to change, and what to watch next. The next morning we
+                adjust from what your body actually did. I take four people at a time.
               </p>
             </Fade>
             <Fade delay={200}>
-              <p className="proof" style={{ marginBottom: "2.25rem" }}>{PROOF}</p>
+              <p className="proof" style={{ marginBottom: "0.75rem" }}>{PROOF}</p>
+            </Fade>
+            <Fade delay={230}>
+              <p className="body-text" style={{ marginBottom: "2.25rem" }}>The private month is $10,000.</p>
             </Fade>
             <Fade delay={260}>
               <Link href="/apply" className="btn">Apply for the thirty days</Link>
@@ -72,9 +74,8 @@ export default function Home() {
           <h2 className="h2 serif" style={{ marginBottom: "1.75rem" }}>Who this is for.</h2>
           <p className="body-text measure">
             A wedding in eight weeks. A number from your doctor you did not expect. A body you no
-            longer recognize after building a company. The wish to hand the whole thing to one
-            person who knows what he is doing and simply do what he says. Different reasons, same
-            month.
+            longer recognize after building a company. The wish to hand the daily decisions to one
+            person who knows what he is doing, and keep the goal. Different reasons, same month.
           </p>
         </section>
       </Fade>
@@ -84,12 +85,12 @@ export default function Home() {
         <section className="section">
           <h2 className="h2 serif" style={{ marginBottom: "1.75rem" }}>What happens.</h2>
           <p className="body-text measure">
-            Day one, we meet for an hour and I build your plan from what you want, your history, and
-            your numbers. Every morning you send your weight, sleep, resting heart rate, and photos
-            of what you ate, and every morning you get back exactly what changes today. Twice a week
-            we talk for twenty-five minutes. Every Friday you get a written review of the week. Day
-            thirty, we look at the numbers side by side and decide together whether you continue with
-            me on a lighter footing.
+            Day one, we meet for an hour and choose the two or three things worth measuring for what
+            you want. Every morning you send them and every morning you get back what to keep, what to
+            change, and what to watch. Twice a week we talk for twenty-five minutes. Every Friday you
+            get a written review of the week. Day thirty, we put the evidence side by side and you
+            leave with a written plan you can run yourself. Continuing with me afterward is a separate
+            decision, never automatic.
           </p>
         </section>
       </Fade>
@@ -119,7 +120,7 @@ export default function Home() {
       <Fade>
         <section className="section">
           <p className="crosslink" style={{ marginBottom: "2rem" }}>
-            Also: <Link href="/self-defense">thirty days from nothing to able to protect yourself.</Link>
+            Also: <Link href="/self-defense">thirty days of self-defense, from zero.</Link>
           </p>
           <Link href="/apply" className="btn">Apply for the thirty days</Link>
         </section>

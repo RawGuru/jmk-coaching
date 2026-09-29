@@ -18,8 +18,10 @@ export default function Call() {
             Let&rsquo;s talk for twenty minutes.
           </h1>
           <p className="lead">
-            I read every application the day it arrives and reply with three times. I will have read
-            yours before we speak.
+            I read every application the day it arrives and reply within one day with three times. I
+            will have read yours before we speak. The call is twenty minutes: what you want, whether
+            this format fits, and whether I am the right person. The plan is built after you decide,
+            not on the call.
           </p>
         </div>
       </Fade>

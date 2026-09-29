@@ -3,9 +3,9 @@ import Fade from "../components/Fade";
 import { pageMeta } from "../lib/meta";
 
 export const metadata = pageMeta({
-  title: "Self-Defense in Thirty Days | Jon-Michael Kerestes",
+  title: "Jon-Michael Kerestes | Thirty Days. Self-Defense from Zero.",
   description:
-    "Thirty days from nothing to able to protect yourself: three days in person, then twenty-seven days of daily drills reviewed on video.",
+    "Thirty days of self-defense from zero: three days in person, then twenty-seven days of drills reviewed on video. $15,000 plus travel.",
   path: "/self-defense",
 });
 
@@ -23,17 +23,17 @@ export default function SelfDefense() {
           </Fade>
           <Fade delay={80}>
             <h1 className="title serif" style={{ marginBottom: "1.75rem" }}>
-              Thirty days. From nothing to able to protect yourself.
+              Thirty days. Self-defense from zero.
             </h1>
           </Fade>
           <Fade delay={140}>
             <p className="lead" style={{ marginBottom: "1.75rem" }}>
               Three days with me in person, then twenty-seven days of daily drills that I review on
               video. You arrive never having been taught to stand, move, or hold your ground. You
-              leave knowing how to keep your balance when someone grabs you, how to break a grip, how
-              to get off the ground, how to control a person who is trying to control you, and how to
-              hit. The same footwork and balance underneath wrestling, judo, and boxing, taught once
-              and applied to all of them.
+              practice until you can keep your balance when someone grabs you, break a grip, get off
+              the ground, control a person who is trying to control you, and hit. The same footwork
+              and balance underneath wrestling, judo, and boxing, taught once and applied to all of
+              them.
             </p>
           </Fade>
           <Fade delay={200}>
@@ -58,8 +58,8 @@ export default function SelfDefense() {
       <Fade>
         <section className="section">
           <p className="body-text measure" style={{ marginBottom: "2rem" }}>
-            Three days in Pittsburgh or where you live. $15,000, travel inside the United States
-            included. Families, ask.
+            Three days in person, where you live or in Pittsburgh, then twenty-seven days of drills I
+            review on video. $15,000 plus travel. Families, ask.
           </p>
           <Link href="/apply?program=self-defense" className="btn">Apply</Link>
         </section>

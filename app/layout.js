@@ -1,14 +1,15 @@
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import { SITE_URL } from "./lib/meta";
 
 const DESCRIPTION =
-  "A thirty-day program that puts your health back in your own hands, read daily by a former Olympic Training Center resident athlete and Air Force Academy wrestler. Four people at a time. In person anywhere, or on video.";
+  "Thirty days of private coaching. You choose what to change and by when; each morning he reads the few numbers that matter for your goal and tells you what to keep, change, and watch. Former Olympic Training Center resident athlete, ranked sixth in the country in judo. Four people at a time. In person anywhere, or on video.";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Jon-Michael Kerestes | Thirty Days. Your Body, Back Under Your Own Command.",
+  title: "Jon-Michael Kerestes | Thirty-Day Private Coaching. You Choose the Result.",
   description: DESCRIPTION,
 };
 
@@ -40,6 +41,7 @@ export default function RootLayout({ children }) {
           <main>{children}</main>
           <Footer />
         </div>
+        <Analytics />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
