@@ -3,14 +3,14 @@ import Fade from "../components/Fade";
 import { pageMeta } from "../lib/meta";
 
 export const metadata = pageMeta({
-  title: "Jon-Michael Kerestes | Thirty Days. Self-Defense from Zero.",
+  title: "Self-Defense From Zero | Jon-Michael Kerestes",
   description:
-    "Thirty days of self-defense from zero: three days in person, then twenty-seven days of drills reviewed on video. $15,000 plus travel.",
+    "For adults who feel unsafe and were never taught anything. Three days in person with a former Olympic Training Center athlete and Air Force Academy wrestler, then a month of coached drills and a year of support.",
   path: "/self-defense",
 });
 
-const PROOF =
-  "Three years as a resident athlete at the Olympic Training Center. Ranked sixth in the country in judo. Wrestler at the Air Force Academy.";
+const CREDENTIALS =
+  "Olympic Training Center resident athlete · Ranked sixth in the country in judo · Air Force Academy wrestler · Coaching since 2004";
 
 export default function SelfDefense() {
   return (
@@ -19,25 +19,24 @@ export default function SelfDefense() {
       <section className="section-first">
         <div className="measure-wide">
           <Fade>
-            <div className="eyebrow">Self-defense</div>
+            <div className="eyebrow" style={{ letterSpacing: "0.12em", lineHeight: 1.6, marginBottom: "1.75rem" }}>
+              {CREDENTIALS}
+            </div>
           </Fade>
           <Fade delay={80}>
             <h1 className="title serif" style={{ marginBottom: "1.75rem" }}>
-              Thirty days. Self-defense from zero.
+              You feel unsafe. I know exactly how to change that.
             </h1>
           </Fade>
           <Fade delay={140}>
-            <p className="lead" style={{ marginBottom: "1.75rem" }}>
-              Three days with me in person, then twenty-seven days of daily drills that I review on
-              video. You arrive never having been taught to stand, move, or hold your ground. You
-              practice until you can keep your balance when someone grabs you, break a grip, get off
-              the ground, control a person who is trying to control you, and hit. The same footwork
-              and balance underneath wrestling, judo, and boxing, taught once and applied to all of
-              them.
+            <p className="lead">
+              I start by finding out where you actually are: your body, your health, what you are
+              afraid of, and what you would do today if someone grabbed you. Then I guide you,
+              quickly, to use your body in ways you never have, until being in public stops feeling
+              like a risk. The people who come to me for this are adults who were never taught
+              anything, are more afraid than they admit, and are not in the shape they want to be.
+              That is the starting point I know best.
             </p>
-          </Fade>
-          <Fade delay={200}>
-            <p className="proof">{PROOF}</p>
           </Fade>
         </div>
       </section>
@@ -47,19 +46,35 @@ export default function SelfDefense() {
         <section className="section">
           <h2 className="h2 serif" style={{ marginBottom: "1.75rem" }}>Who this is for.</h2>
           <p className="body-text measure">
-            A daughter leaving for college. Someone living alone for the first time in years. A
-            family after a break-in. A person who travels. Anyone who has none of this and wants it
-            fast.
+            Adults who were never taught anything. Someone who travels alone. Someone living alone for
+            the first time in years. A family after a break-in. Anyone who wants this handled.
           </p>
         </section>
       </Fade>
 
-      {/* terms + apply */}
+      {/* what happens */}
+      <Fade>
+        <section className="section">
+          <h2 className="h2 serif" style={{ marginBottom: "1.75rem" }}>What happens.</h2>
+          <p className="body-text measure">
+            The first day I assess what your body can do now and what you do when you are grabbed,
+            pushed, or put on the ground. By the end of the three days you know what to do in the
+            moments you have been afraid of: the grab, the shove, being on the ground, someone in your
+            space who will not leave. Over the month we make it automatic with short daily drills, and
+            you get stronger and steadier along the way. After that, I am a video away for the rest of
+            the year.
+          </p>
+        </section>
+      </Fade>
+
+      {/* structure + apply */}
       <Fade>
         <section className="section">
           <p className="body-text measure" style={{ marginBottom: "2rem" }}>
-            Three days in person, where you live or in Pittsburgh, then twenty-seven days of drills I
-            review on video. $15,000 plus travel. Families, ask.
+            Three days together in person, where you live or in Pittsburgh. Then I stay with you:
+            daily drills I review on video through the first month, and for the rest of the year you
+            send me a video whenever something feels uncertain and I answer within a day. $15,000 plus
+            travel. Families, ask.
           </p>
           <Link href="/apply?program=self-defense" className="btn">Apply</Link>
         </section>

@@ -5,11 +5,11 @@ import Footer from "./components/Footer";
 import { SITE_URL } from "./lib/meta";
 
 const DESCRIPTION =
-  "Thirty days of private coaching. You choose what to change and by when; each morning he reads the few numbers that matter for your goal and tells you what to keep, change, and watch. Former Olympic Training Center resident athlete, ranked sixth in the country in judo. Four people at a time. In person anywhere, or on video.";
+  "Private coaching from a former Olympic Training Center resident athlete, ranked sixth in the country in judo. Tell him what you want to change and by when; each morning he reads the few numbers that matter and tells you what to keep, change, and watch. Four people at a time.";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Jon-Michael Kerestes | Thirty-Day Private Coaching. You Choose the Result.",
+  title: "Jon-Michael Kerestes | Private Coaching. You Know What You Want Your Body to Be.",
   description: DESCRIPTION,
 };
 

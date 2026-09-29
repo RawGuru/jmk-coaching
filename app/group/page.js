@@ -2,7 +2,7 @@ import Fade from "../components/Fade";
 import { pageMeta } from "../lib/meta";
 
 export const metadata = pageMeta({
-  title: "The Thirty Days, in a Group of Ten | Jon-Michael Kerestes",
+  title: "In a Group of Ten | Jon-Michael Kerestes",
   description: "The same daily plan and daily adjustments in a group of ten, one live hour with me each week.",
   path: "/group",
   index: false,
@@ -15,7 +15,7 @@ export default function Group() {
       <Fade>
         <div className="measure">
           <h1 className="title serif" style={{ marginBottom: "1.75rem" }}>
-            The same thirty days, in a group of ten.
+            The same program, in a group of ten.
           </h1>
           <p className="lead" style={{ marginBottom: "2rem" }}>
             The same daily plan and daily adjustments, one live hour with me each week, the
