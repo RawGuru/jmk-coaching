@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { track } from "@vercel/analytics";
 import { FORMSPREE_ENDPOINT } from "../lib/meta";
+import { reportConversion } from "../lib/conversion";
 
 const PROGRAMS = [
   { value: "Private coaching", param: "private", consent: "I understand the private month is $10,000." },
@@ -55,6 +56,7 @@ export default function ApplyForm() {
       });
       if (res.ok) {
         track("application", { program: form.program });
+        await reportConversion(form.program);
         router.push("/call");
       } else {
         setStatus("error");

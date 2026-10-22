@@ -2,6 +2,7 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import GoogleTag from "./components/GoogleTag";
 import { SITE_URL } from "./lib/meta";
 
 const DESCRIPTION =
@@ -42,6 +43,7 @@ export default function RootLayout({ children }) {
           <Footer />
         </div>
         <Analytics />
+        <GoogleTag />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
