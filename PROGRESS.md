@@ -19,11 +19,12 @@ Repo: RawGuru/jmk-coaching · Next.js app router · Vercel auto-deploys on push 
 - [x] **Stage 2 — Correct the customer-facing offer.** DONE (partial): `/services` (Ways to work together) with 6 tiers; $10k and $15k exact, all new tiers "Ask for a proposal". Testimonials: `app/lib/reviews.js` (7 verbatim), `Testimonials` component, featured on homepage, full set on `/reviews` (with non-guarantee note, no star markup). Nav now Services / Self-defense / Apply. STILL OPEN: application does not yet capture which service / location / remote-vs-in-person / price-fit (the "Ask for a proposal" buttons route to /apply which only offers private/self-defense). → Stage 4.
 - [x] **Stage 3 — Global availability mechanism.** DONE: `/in-person` page + `app/lib/availability.js` (open/confirmed windows; all currently "open/by arrangement", no fabricated confirmed trips) + `InPersonRequestForm` (city, dates, service, goal → Formspree type=in-person-request → /call). Owner edits availability.js to confirm a city.
 - [~] **Stage 4 — Technical acquisition infra.** DONE: marketing attribution (`app/lib/attribution.js` + `Attribution` in layout) captures UTM/gclid/fbclid/referrer/landing on first load and attaches to ALL form submissions (apply, self-defense, in-person, self-run waitlist). Conversion tracking: env-gated (see conversion.js). STILL OPEN (needs owner access, not code): Formspree auto-acknowledgement/autoreply is a Formspree dashboard setting; lead classification + follow-up reminders would need a light automation (recurring task) — see recurring-ops prompt in final report.
-- [ ] **Stage 5 — Prepare marketing campaigns (code/assets only, paused).** Google brief exists at `marketing/google-ads-search-brief.md`. Meta assets + channel recommendation pending.
-- [ ] **Stage 6 — Test the whole system** (mobile/desktop nav, forms, attribution, availability).
-- [ ] **Stage 7 — Deploy + final report.**
-- [x] **JESS_TEST.md** — written (her steps only: walk pages, test 3 forms with a +test email marked "TEST - Jess", confirm /call redirect, verify notifications, check review expand, report).
-- [ ] **Video (§10)** — section stays hidden until `NEXT_PUBLIC_VIDEO_URL` set; recording script to be delivered in report.
+- [~] **Stage 5 — Prepare marketing campaigns (code/assets only, paused).** Google Ads brief at `marketing/google-ads-search-brief.md`. Recommendation: Google Search, self-defense category, premium high-intent terms, $300 test, paused until budget approved. Meta creative concepts in brief/report; NEEDS Google Ads + Meta Ads access to build the paused campaigns.
+- [x] **Stage 6 — Test the whole system (automated portion).** All 9 routes return 200 live; build passes; one h1/page; zero em dashes; prices exact; 3 forms post + redirect to /call. Human device/UX testing delegated to Jess (`JESS_TEST.md`).
+- [x] **Stage 7 — Deploy.** All work pushed to main and live; report delivered in chat; this file is the durable tracker.
+- [x] **JESS_TEST.md** — written (her steps only).
+- [x] **Video (§10)** — script at `marketing/video-script.md`. Section hidden until `NEXT_PUBLIC_VIDEO_URL` set.
+- [x] **Recurring ops (header #4)** — ready-to-paste scheduled-task prompt at `marketing/recurring-ops-task.md` (not built; owner pastes it).
 
 ## Owner decisions / access needed (batch)
 - Verbatim text (or the screenshot) for Scott W. (May 30 2016), Allison M., and the other 4 Thumbtack reviews, to publish them.
