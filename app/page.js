@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Fade from "./components/Fade";
+import Testimonials from "./components/Testimonials";
+import { reviews, featuredAuthors } from "./lib/reviews";
 import { pageMeta } from "./lib/meta";
 
 export const metadata = pageMeta({
@@ -94,6 +96,21 @@ export default function Home() {
             leave with a written plan you can run yourself. For the rest of the year, you send me a
             message or a video whenever something feels off and I answer within a day. Continuing with
             me afterward is a separate decision, never automatic.
+          </p>
+        </section>
+      </Fade>
+
+      {/* SECTION 4b — testimonials */}
+      <Fade>
+        <section className="section">
+          <h2 className="h2 serif" style={{ marginBottom: "2rem" }}>What clients say.</h2>
+          <Testimonials reviews={reviews.filter((r) => featuredAuthors.includes(r.author))} />
+          <p style={{ marginTop: "2rem" }}>
+            <Link href="/reviews" className="crosslink">
+              <span style={{ borderBottom: "1px solid var(--clay)", color: "var(--clay)" }}>
+                Read more of what clients say.
+              </span>
+            </Link>
           </p>
         </section>
       </Fade>
