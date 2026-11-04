@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { track } from "@vercel/analytics";
 import { FORMSPREE_ENDPOINT } from "../lib/meta";
+import { getAttribution } from "../lib/attribution";
 
 const SERVICES = [
   "In-person intensive",
@@ -26,7 +27,7 @@ export default function InPersonRequestForm() {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ type: "in-person-request", ...form }),
+        body: JSON.stringify({ type: "in-person-request", ...form, ...getAttribution() }),
       });
       if (res.ok) {
         track("in_person_request", { city: form.city, service: form.service });

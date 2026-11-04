@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { track } from "@vercel/analytics";
 import { FORMSPREE_ENDPOINT } from "../lib/meta";
 import { reportConversion } from "../lib/conversion";
+import { getAttribution } from "../lib/attribution";
 
 const PROGRAMS = [
   { value: "Private coaching", param: "private", consent: "I understand the private month is $10,000." },
@@ -57,6 +58,7 @@ export default function ApplyForm({ defaultProgram } = {}) {
           goal: form.goal,
           driving: form.driving,
           consent: current.consent,
+          ...getAttribution(),
         }),
       });
       if (res.ok) {

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FORMSPREE_ENDPOINT } from "../lib/meta";
+import { getAttribution } from "../lib/attribution";
 
 export default function SelfRunForm() {
   const [email, setEmail] = useState("");
@@ -14,7 +15,7 @@ export default function SelfRunForm() {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ email, type: "waitlist" }),
+        body: JSON.stringify({ email, type: "waitlist", ...getAttribution() }),
       });
       setStatus(res.ok ? "success" : "error");
     } catch {
