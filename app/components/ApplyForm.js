@@ -16,19 +16,24 @@ const QUESTIONS = [
   { id: "driving", label: "What is driving this right now?" },
 ];
 
-const empty = {
-  name: "", email: "",
-  program: PROGRAMS[0].value,
-  goal: "", driving: "",
-  consent: false,
-};
+function programValue(param) {
+  const match = PROGRAMS.find((p) => p.param === param);
+  return match ? match.value : PROGRAMS[0].value;
+}
 
-export default function ApplyForm() {
+// defaultProgram: a program param ("private" | "self-defense") used to preselect
+// the program when the form is rendered outside /apply (e.g. on /self-defense).
+export default function ApplyForm({ defaultProgram } = {}) {
   const router = useRouter();
-  const [form, setForm] = useState(empty);
+  const [form, setForm] = useState(() => ({
+    name: "", email: "",
+    program: programValue(defaultProgram),
+    goal: "", driving: "",
+    consent: false,
+  }));
   const [status, setStatus] = useState("idle");
 
-  // Preselect program from ?program= query param.
+  // A ?program= query param still overrides (used on /apply).
   useEffect(() => {
     const param = new URLSearchParams(window.location.search).get("program");
     const match = PROGRAMS.find((p) => p.param === param);

@@ -1,5 +1,5 @@
-import Link from "next/link";
 import Fade from "../components/Fade";
+import ApplyForm from "../components/ApplyForm";
 import { pageMeta } from "../lib/meta";
 
 export const metadata = pageMeta({
@@ -76,7 +76,21 @@ export default function SelfDefense() {
             send me a video whenever something feels uncertain and I answer within a day. $15,000 plus
             travel. Families, ask.
           </p>
-          <Link href="/apply?program=self-defense" className="btn">Apply</Link>
+          <a href="#apply-form" className="btn">Apply</a>
+        </section>
+      </Fade>
+
+      {/* application form */}
+      <Fade>
+        <section id="apply-form" className="section">
+          <div className="measure" style={{ marginBottom: "2.5rem" }}>
+            <h2 className="h2 serif" style={{ marginBottom: "1.5rem" }}>Apply.</h2>
+            <p className="lead">
+              Tell me what you want to be different and what is driving it. I read every application
+              personally and reply with times to talk.
+            </p>
+          </div>
+          <ApplyForm defaultProgram="self-defense" />
         </section>
       </Fade>
     </>
