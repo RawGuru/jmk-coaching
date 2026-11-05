@@ -46,6 +46,59 @@ testing still needs a preview deploy with a mocked endpoint (see blockers).
 
 ---
 
+## First-time-customer readiness pass (2026-11-05)
+
+Focus: make the site complete, convincing, accurate, reliable for a stranger. Advertising untouched/paused.
+
+**Objective defects fixed and deployed:**
+1. **Apply preselection now correct before hydration.** `/apply` reads `?program=` on the server
+   (`searchParams`) and passes it to `ApplyForm` (which remounts via `key`). The old post-hydration
+   `useEffect` that caused the wrong program/price to flash first is gone. Verified by curling the
+   prod build: `/apply?program=virtual|self-defense|not-sure|private` each render the correct chip
+   selected AND the matching price acknowledgment in the raw SSR HTML.
+2. **Content is visible before/without JS.** `Fade` previously set `opacity:0` until a post-hydration
+   IntersectionObserver fired, hiding every page's content pre-hydration and with JS off. Now
+   progressive enhancement: `.fade` is visible by default; an inline script sets `html.js` and only
+   then does the fade-in apply (reduced-motion respected). Verified: no inline `opacity:0` in SSR.
+3. **Application captures the missing facts.** Added **location**, **remote/in person/either**, and
+   **desired start** fields to `ApplyForm`; all three are in the Formspree submission.
+4. **Internal linking / dead-ends.** `/reviews` had no outbound path — added an Apply CTA. Homepage
+   now links to `/services`. Footer now carries site-wide internal links (Services, Self-defense,
+   In person, Reviews, Apply). Every substantive page is reachable.
+
+**Clarity / credibility edits:**
+- Six-item service menu rewritten so each card states a distinct benefit, what happens, what you
+  receive, and the boundary. The two overlapping remote tiers are now clearly split: *Ongoing remote
+  guidance* = async only, no live calls, no full plan; *Private virtual coaching* = full relationship
+  with live calls + plan, over a longer timeline than the month. Prices unchanged.
+- `$10,000` card leads with the value ("my daily attention for a month, then a year within reach")
+  and enumerates the deliverables + scarcity (four at a time).
+- `/reviews` now states the reviews are reproduced verbatim from the public five-star reviews (no star
+  markup). All 7 authentic reviews kept; Scott W. and the other 5 remain OFF pending verbatim text.
+
+**Verified here (prod build, local server, curl):** all 9 routes 200; service links preselect the
+right program + acknowledgment in SSR (before hydration); new fields render; prices exact; menu CTAs
+route correctly; `npm run build` clean. **Not done here:** live form submission (would create real
+Formspree leads) and desktop/mobile visual + post-hydration interaction — these need a Vercel preview
+URL with a mocked endpoint and the human pass in `JESS_TEST.md`.
+
+### Owner decisions still required (pricing / scope / proof)
+- **Prices for the 4 "Ask for a proposal" tiers** (single question, ongoing remote, private virtual,
+  in-person). Until set they stay "Ask for a proposal". Suggested ladder: single question lowest,
+  ongoing remote mid, private virtual just under the $10k month, in-person premium.
+- **Consolidate the two remote tiers?** *Ongoing remote guidance* vs *Private virtual coaching* are
+  now distinct but adjacent; decide whether both earn a place or they merge.
+- **`/group` ($2,500) and `/self-run` ($400)** are noindex, unlinked orphan funnel pages carrying
+  prices that are NOT in the approved set. Decide: approve + surface in the menu, change to "Ask for a
+  proposal", or keep as private direct-link funnels. (Left as-is for now; flagged.)
+- **Testimonials are all 2013–2014 personal-training reviews** — authentic but not aligned with the
+  current $10k private-month / self-defense offer. Supplying newer, more-relevant verbatim reviews
+  (and Scott W. May 2016 + the remaining 5) would materially strengthen proof. Must be verbatim.
+- **Booking mechanism** for suitable applicants (prior stage): how times are sent; whether to set
+  `NEXT_PUBLIC_BOOKING_URL` given the open-self-booking caveat.
+
+---
+
 ## Stage status
 
 - [x] **Stage 1 — Audit.** No `City pages for the February in-person month` commit exists; no `lib/cities.ts`/`app/in` → build In-Person Availability from scratch. No CLAUDE.md. Vercel CLI not installed (cannot read/set env vars from here). Existing: Person JSON-LD, sitemap, robots, Vercel Analytics, env-gated Google tag + conversion (`app/components/GoogleTag.js`, `app/lib/conversion.js` [reconciled with a parallel session's commit 3eb3f86], `CallConversion`), Formspree form, /apply + /self-defense (form now on both), /call /group /self-run funnel pages (noindex).

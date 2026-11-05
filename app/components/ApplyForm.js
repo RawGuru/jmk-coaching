@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { track } from "@vercel/analytics";
 import { FORMSPREE_ENDPOINT } from "../lib/meta";
@@ -56,29 +56,28 @@ const QUESTIONS = [
   { id: "driving", label: "What is driving this right now?" },
 ];
 
+const FORMATS = ["Remote", "In person", "Either"];
+
 function programValue(param) {
   const match = PROGRAMS.find((p) => p.param === param);
   return match ? match.value : PROGRAMS[0].value;
 }
 
-// defaultProgram: a program param ("private" | "self-defense") used to preselect
-// the program when the form is rendered outside /apply (e.g. on /self-defense).
+// defaultProgram: a program param (e.g. "private", "self-defense", "virtual")
+// resolved on the server from the ?program= query or passed directly (e.g. on
+// /self-defense), so the correct program is selected on first paint. The page
+// remounts this form when the param changes (via `key`), so no client-side
+// re-sync is needed.
 export default function ApplyForm({ defaultProgram } = {}) {
   const router = useRouter();
   const [form, setForm] = useState(() => ({
     name: "", email: "",
     program: programValue(defaultProgram),
+    location: "", format: "", start: "",
     goal: "", driving: "",
     consent: false,
   }));
   const [status, setStatus] = useState("idle");
-
-  // A ?program= query param still overrides (used on /apply).
-  useEffect(() => {
-    const param = new URLSearchParams(window.location.search).get("program");
-    const match = PROGRAMS.find((p) => p.param === param);
-    if (match) setForm((prev) => ({ ...prev, program: match.value }));
-  }, []);
 
   const set = (k, v) => setForm((prev) => ({ ...prev, [k]: v }));
   const current = PROGRAMS.find((p) => p.value === form.program) || PROGRAMS[0];
@@ -96,6 +95,9 @@ export default function ApplyForm({ defaultProgram } = {}) {
           email: form.email,
           program: form.program,
           interest: current.interest,
+          location: form.location,
+          format: form.format,
+          start: form.start,
           goal: form.goal,
           driving: form.driving,
           consent: current.consent,
@@ -139,6 +141,34 @@ export default function ApplyForm({ defaultProgram } = {}) {
               <input type="radio" name="program" value={p.value} className="visually-hidden"
                 checked={form.program === p.value} onChange={(e) => set("program", e.target.value)} required />
               {p.value}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      {/* location + desired start */}
+      <div className="two-input">
+        <div className="field">
+          <label className="field-label" htmlFor="location">Where are you?</label>
+          <input className="input" id="location" name="location" type="text" placeholder="City, country"
+            value={form.location} onChange={(e) => set("location", e.target.value)} required />
+        </div>
+        <div className="field">
+          <label className="field-label" htmlFor="start">When do you want to start?</label>
+          <input className="input" id="start" name="start" type="text" placeholder="e.g. this month, in January, as soon as possible"
+            value={form.start} onChange={(e) => set("start", e.target.value)} required />
+        </div>
+      </div>
+
+      {/* remote / in person preference */}
+      <fieldset className="field" style={{ border: 0 }}>
+        <legend className="field-label" style={{ marginBottom: "0.5rem" }}>Remote, in person, or either?</legend>
+        <div className="chips">
+          {FORMATS.map((f) => (
+            <label key={f} className={`chip${form.format === f ? " sel" : ""}`}>
+              <input type="radio" name="format" value={f} className="visually-hidden"
+                checked={form.format === f} onChange={(e) => set("format", e.target.value)} required />
+              {f}
             </label>
           ))}
         </div>

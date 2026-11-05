@@ -133,9 +133,12 @@ export default function Home() {
         </section>
       </Fade>
 
-      {/* SECTION 6 — self-defense crosslink + button */}
+      {/* SECTION 6 — ways to work + self-defense crosslink + button */}
       <Fade>
         <section className="section">
+          <p className="crosslink" style={{ marginBottom: "1rem" }}>
+            Not sure this is the right shape? <Link href="/services">See all the ways to work together.</Link>
+          </p>
           <p className="crosslink" style={{ marginBottom: "2rem" }}>
             Also: <Link href="/self-defense">self-defense, from zero.</Link>
           </p>

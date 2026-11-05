@@ -5,11 +5,15 @@ import { pageMeta } from "../lib/meta";
 export const metadata = pageMeta({
   title: "Apply | Jon-Michael Kerestes",
   description:
-    "Apply for private coaching or the self-defense program. I read every application personally.",
+    "Apply to work with Jon-Michael, from a single question to the private month, self-defense, or in-person work. He reads every application personally.",
   path: "/apply",
 });
 
-export default function Apply() {
+// searchParams makes the correct program preselect on the server, so the right
+// service and price acknowledgment render on first paint (before hydration)
+// when a visitor follows a service link such as /apply?program=virtual.
+export default function Apply({ searchParams }) {
+  const program = typeof searchParams?.program === "string" ? searchParams.program : undefined;
   return (
     <section className="section-first">
       <Fade>
@@ -25,7 +29,7 @@ export default function Apply() {
         </div>
       </Fade>
       <Fade delay={120}>
-        <ApplyForm />
+        <ApplyForm key={program || "default"} defaultProgram={program} />
       </Fade>
     </section>
   );

@@ -38,6 +38,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        {/* Marks JS as available before paint so the fade-in only applies when
+            JavaScript can reveal content; without JS, content stays visible. */}
+        <script
+          dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }}
+        />
         <div className="container">
           <Nav />
           <main>{children}</main>
