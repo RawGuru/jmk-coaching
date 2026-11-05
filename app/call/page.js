@@ -3,8 +3,8 @@ import CallConversion from "../components/CallConversion";
 import { pageMeta } from "../lib/meta";
 
 export const metadata = pageMeta({
-  title: "Let's Talk | Jon-Michael Kerestes",
-  description: "Book a twenty-minute call. I read every application the day it arrives.",
+  title: "Your Application Is In | Jon-Michael Kerestes",
+  description: "I read every application the day it arrives. If it is a fit, I reply with a few proposed times.",
   path: "/call",
   index: false,
 });
@@ -17,13 +17,13 @@ export default function Call() {
       <Fade>
         <div className="measure">
           <h1 className="title serif" style={{ marginBottom: "1.75rem" }}>
-            Let&rsquo;s talk for twenty minutes.
+            Your application is in.
           </h1>
           <p className="lead">
-            I read every application the day it arrives and reply within one day with three times. I
-            will have read yours before we speak. The call is twenty minutes: what you want, whether
-            this format fits, and whether I am the right person. The plan is built after you decide,
-            not on the call.
+            I read every application personally, the day it arrives. If it is a fit, I reply with a
+            few proposed times for a short call: what you want, whether this format fits, and whether
+            I am the right person. If it is not the right fit, I will tell you that too. The plan is
+            built after you decide, not on the call.
           </p>
         </div>
       </Fade>

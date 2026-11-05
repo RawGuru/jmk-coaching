@@ -7,9 +7,48 @@ import { FORMSPREE_ENDPOINT } from "../lib/meta";
 import { reportConversion } from "../lib/conversion";
 import { getAttribution } from "../lib/attribution";
 
+// Each option carries an `interest` label (PREMIUM | SMALLER | NOT SURE). The
+// label is for sorting and the email subject only — it is a service-interest
+// tag, not a decision about who gets a call. `consent` is the price-fit
+// acknowledgment the applicant ticks: an exact price where one is set, and an
+// honest "scoped and priced before we begin" where none is published yet.
 const PROGRAMS = [
-  { value: "Private coaching", param: "private", consent: "I understand the private month is $10,000." },
-  { value: "Self-defense", param: "self-defense", consent: "I understand the self-defense month is $15,000 plus travel." },
+  {
+    value: "The private month",
+    param: "private",
+    interest: "PREMIUM",
+    consent: "I understand the private month is $10,000, with the year of follow-up included.",
+  },
+  {
+    value: "Self-defense from zero",
+    param: "self-defense",
+    interest: "PREMIUM",
+    consent: "I understand the self-defense month is $15,000 plus travel.",
+  },
+  {
+    value: "A single question, answered",
+    param: "question",
+    interest: "SMALLER",
+    consent: "I understand this is individual coaching, scoped and priced for me before we begin.",
+  },
+  {
+    value: "Ongoing remote guidance",
+    param: "remote",
+    interest: "SMALLER",
+    consent: "I understand this is individual coaching, scoped and priced for me before we begin.",
+  },
+  {
+    value: "Private virtual coaching",
+    param: "virtual",
+    interest: "SMALLER",
+    consent: "I understand this is individual coaching, scoped and priced for me before we begin.",
+  },
+  {
+    value: "Not sure yet",
+    param: "not-sure",
+    interest: "NOT SURE",
+    consent: "I understand this is paid individual coaching, scoped before any price is set.",
+  },
 ];
 
 const QUESTIONS = [
@@ -52,9 +91,11 @@ export default function ApplyForm({ defaultProgram } = {}) {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
+          _subject: `Application: ${current.value} [${current.interest}]`,
           name: form.name,
           email: form.email,
           program: form.program,
+          interest: current.interest,
           goal: form.goal,
           driving: form.driving,
           consent: current.consent,
@@ -62,7 +103,7 @@ export default function ApplyForm({ defaultProgram } = {}) {
         }),
       });
       if (res.ok) {
-        track("application", { program: form.program });
+        track("application", { program: form.program, interest: current.interest });
         await reportConversion(form.program);
         router.push("/call");
       } else {

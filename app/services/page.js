@@ -16,7 +16,7 @@ const SERVICES = [
       "Send me one specific question, problem, or short video, for example a movement you want checked, a training question, or a place you keep getting stuck. I review it personally and send back a considered response with concrete next steps. One submission, one reply.",
     price: "Ask for a proposal",
     cta: "Ask for a proposal",
-    href: "/apply",
+    href: "/apply?program=question",
   },
   {
     title: "Ongoing remote guidance.",
@@ -24,7 +24,7 @@ const SERVICES = [
       "A continuing relationship with agreed access to me through voice messages, video submissions, and questions. You send technique, training changes, or an emerging problem on a rhythm we set, and I respond. A defined cadence, not unlimited instant access.",
     price: "Ask for a proposal",
     cta: "Ask for a proposal",
-    href: "/apply",
+    href: "/apply?program=remote",
   },
   {
     title: "Private virtual coaching.",
@@ -32,7 +32,7 @@ const SERVICES = [
       "A substantial individualized relationship: assessment, live conversations, a plan, continued feedback, and real adjustments as you progress. More than occasional guidance. We work your actual situation over time, on video from anywhere.",
     price: "Ask for a proposal",
     cta: "Ask for a proposal",
-    href: "/apply",
+    href: "/apply?program=virtual",
   },
   {
     title: "The private month.",

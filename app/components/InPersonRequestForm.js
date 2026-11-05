@@ -27,7 +27,12 @@ export default function InPersonRequestForm() {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ type: "in-person-request", ...form, ...getAttribution() }),
+        body: JSON.stringify({
+          _subject: `In-person request: ${form.service} [IN-PERSON]`,
+          type: "in-person-request",
+          ...form,
+          ...getAttribution(),
+        }),
       });
       if (res.ok) {
         track("in_person_request", { city: form.city, service: form.service });

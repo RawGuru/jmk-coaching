@@ -13,9 +13,21 @@
 const SEND_TO = process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION;
 const CALL_SEND_TO = process.env.NEXT_PUBLIC_GOOGLE_ADS_CALL_CONVERSION;
 
+// Conversions fire only on a production deployment. Preview deployments and
+// local/test builds never report to Google Ads, even if the conversion env
+// vars are present. This is driven by the build environment (see
+// next.config.mjs), not by any request-time or URL input, so it cannot be
+// turned on or off from a link.
+const IS_PRODUCTION = process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
+
 function send(sendTo, params) {
   return new Promise((resolve) => {
-    if (typeof window === "undefined" || typeof window.gtag !== "function" || !sendTo) {
+    if (
+      typeof window === "undefined" ||
+      typeof window.gtag !== "function" ||
+      !sendTo ||
+      !IS_PRODUCTION
+    ) {
       resolve();
       return;
     }
