@@ -40,4 +40,4 @@ export const reviews = [
   }
 ];
 
-export const featuredAuthors = ["Valentin N.", "Deborah M."];
+export const featuredAuthors = ["Valentin N.", "Rob M."];

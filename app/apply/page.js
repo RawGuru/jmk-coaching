@@ -24,7 +24,7 @@ export default function Apply({ searchParams }) {
           </h1>
           <p className="lead">
             Tell me what you want to be different and what is driving it. I read every application
-            personally and reply with times to talk.
+            personally. If it is a fit, I reply with a few times to talk.
           </p>
         </div>
       </Fade>

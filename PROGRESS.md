@@ -99,6 +99,51 @@ URL with a mocked endpoint and the human pass in `JESS_TEST.md`.
 
 ---
 
+## Controlled E2E + stranger evaluation (2026-11-05)
+
+Owner decisions this round: keep `/group` + `/self-run` hidden/noindex; retain both remote tiers;
+leave all unapproved prices unchanged. Advertising untouched/paused.
+
+**Controlled end-to-end testing (no production leads).** Installed Playwright+Chromium locally (not
+committed to the app). Made the Formspree endpoint env-overridable (`NEXT_PUBLIC_FORMSPREE_ENDPOINT`,
+falls back to the live form) and ran a local prod build pointed at a **mock** endpoint on :9999.
+Drove the real browser on **desktop (1280)** and **mobile (iPhone 13)**, plus a **no-JS** context:
+- All nav routes 200 (desktop + mobile).
+- Service links preselect the right program + acknowledgment **before hydration** (no-JS: self-defense
+  chip selected, $15k consent, form `opacity:1`) **and** after hydration (desktop + mobile: virtual
+  chip selected).
+- Full application submitted end to end on both viewports to the mock, redirecting to `/call`
+  ("Your application is in."). The mock received every field including the new **location / format /
+  start**, plus `interest`, the sortable `_subject`, and attribution.
+- Self-defense preselect and the in-person request form both submit and reach `/call`.
+- Screenshots reviewed on both viewports: forms, the 6-card menu, reviews, home all render cleanly.
+  (A clean production build was confirmed to contain the real Formspree endpoint and no mock.)
+
+**Objective problems fixed this round:**
+- `/apply` intro still promised "reply with times to talk"; softened to "If it is a fit, I reply with
+  a few times to talk," matching `/call` and `/self-defense`.
+- Homepage featured reviews realigned for a premium buyer: Valentin N. (busy-professional
+  transformation) + Rob M. (five-year client, "extremely knowledgeable in physiology and nutrition")
+  instead of the two weight-loss stories. All reviews remain verbatim.
+
+**Stranger-eye evaluation of the six offers — substantive weaknesses that need OWNER input:**
+1. **No price anchor on the four "Ask for a proposal" tiers.** A cold buyer cannot tell if "A single
+   question" is $50 or $5,000. This is the single biggest friction point for a stranger. Needs owner
+   pricing (even a "from" figure or range). Left unchanged per instruction; isolated for approval.
+2. **Testimonial relevance gap.** All seven verbatim reviews are 2013–2014 personal-training /
+   weight-loss. There is no social proof for the $10k private month, private virtual, in-person, or
+   self-defense specifically. Materially weakens credibility for the premium offers. Needs
+   owner-supplied verbatim reviews. **Scott W. (May 2016) is ready to add the moment the screenshot is
+   provided** (pipeline: `content/reviews-source.md` -> `app/lib/reviews.js`).
+3. **No application receipt email.** The only confirmation a stranger gets is the `/call` page; there
+   is no autoresponder. Turning on Formspree's autoresponse (dashboard setting) would close an obvious
+   trust gap. Owner action.
+
+Deliverables, "what happens," and boundaries now read clearly per offer; the two remote tiers are
+distinct (async-only vs full relationship). No further objective copy defects found in the menu.
+
+---
+
 ## Stage status
 
 - [x] **Stage 1 — Audit.** No `City pages for the February in-person month` commit exists; no `lib/cities.ts`/`app/in` → build In-Person Availability from scratch. No CLAUDE.md. Vercel CLI not installed (cannot read/set env vars from here). Existing: Person JSON-LD, sitemap, robots, Vercel Analytics, env-gated Google tag + conversion (`app/components/GoogleTag.js`, `app/lib/conversion.js` [reconciled with a parallel session's commit 3eb3f86], `CallConversion`), Formspree form, /apply + /self-defense (form now on both), /call /group /self-run funnel pages (noindex).

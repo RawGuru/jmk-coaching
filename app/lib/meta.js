@@ -1,5 +1,8 @@
 export const SITE_URL = "https://www.jmkerestes.com";
-export const FORMSPREE_ENDPOINT = "https://formspree.io/f/xeergpqw";
+// Defaults to the live Formspree form. Overridable via env so controlled tests
+// can point submissions at a local mock instead of the production inbox.
+export const FORMSPREE_ENDPOINT =
+  process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || "https://formspree.io/f/xeergpqw";
 
 // Build a consistent per-page metadata object.
 export function pageMeta({ title, description, path = "/", index = true }) {
