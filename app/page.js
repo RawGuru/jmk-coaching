@@ -1,13 +1,13 @@
 import Link from "next/link";
 import Fade from "./components/Fade";
 import Testimonials from "./components/Testimonials";
-import { reviews, featuredAuthors } from "./lib/reviews";
+import { reviews } from "./lib/reviews";
 import { pageMeta } from "./lib/meta";
 
 export const metadata = pageMeta({
-  title: "Jon-Michael Kerestes | Personal Coaching on Movement, Habits, and Skill",
+  title: "Jon-Michael Kerestes | Private Coaching, Four People at a Time",
   description:
-    "Personal coaching on movement, food habits, physical skill, and self-defense with a former Olympic Training Center judoka and Air Force Academy wrestler. The approach follows your actual situation, not a predetermined program.",
+    "Private coaching on strength, movement, food, and physical skill from a former Olympic Training Center resident athlete. Four people at a time, and each one hears from him every day, in person or on video.",
   path: "/",
 });
 
@@ -30,30 +30,24 @@ export default function Home() {
             </Fade>
             <Fade delay={80}>
               <h1 className="title serif" style={{ marginBottom: "1.75rem" }}>
-                If a plan only works when you force yourself to follow it, what exactly has it solved?
+                I coach four people at a time, and each one hears from me every day.
               </h1>
             </Fade>
             <Fade delay={140}>
               <p className="lead" style={{ marginBottom: "1.5rem" }}>
-                Wanting a result and wanting the life that produces it are different things. Someone
-                can sincerely want to be stronger and dread every workout. Someone can want to eat
-                differently and experience every meal as another set of rules. Someone else may simply
-                want an experienced person to take charge of decisions for a while. These are different
-                situations, and they deserve different approaches.
+                Strength, movement, food, and physical skill, in person or on video from anywhere. You
+                tell me what you want to be different. Every morning you send me the few things that
+                matter for it, and I send back what to keep, what to change, and what to watch.
               </p>
             </Fade>
             <Fade delay={200}>
               <p className="body-text" style={{ marginBottom: "2.25rem" }}>
-                I work personally with people on movement, food habits, physical skill, self-defense,
-                and the ways their days actually feel. Sometimes the useful work is discipline and
-                direction. Sometimes it is discovering how an activity can become something worth
-                returning to. The question is what matters for the person in front of me, and what we
-                learn by trying.
+                You decide how much of the day-to-day deciding you hand to me.
               </p>
             </Fade>
             <Fade delay={260}>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "1.25rem", alignItems: "center" }}>
-                <a href="#useful-question" className="btn">A useful question</a>
+                <Link href="/apply?program=private" className="btn">Apply</Link>
                 <Link href="/services" className="crosslink">
                   <span style={{ borderBottom: "1px solid var(--clay)", color: "var(--clay)" }}>
                     Ways to work together
@@ -83,51 +77,43 @@ export default function Home() {
         </Fade>
       )}
 
-      {/* SECTION 3 — a useful question */}
+      {/* SECTION 3 — the month */}
       <Fade>
-        <section className="section" id="useful-question">
+        <section className="section" id="the-month">
           <div className="measure">
-            <h2 className="h2 serif" style={{ marginBottom: "1.75rem" }}>
-              Before demanding more willpower, examine what you are asking it to overcome.
-            </h2>
+            <h2 className="h2 serif" style={{ marginBottom: "1.75rem" }}>What the month looks like.</h2>
             <p className="body-text" style={{ marginBottom: "1.5rem" }}>
-              Choose one thing you intend to do but keep resisting. Ask what, exactly, you resist: the
-              activity, its intensity, the time, the place, the company, or the feeling that you are
-              being graded? Those are different problems. Change one condition and notice whether you
-              want to return tomorrow. You have tested something more useful than whether you can force
-              yourself through another day.
+              One hour on day one builds your plan from what you want and where you are. Every morning
+              you send the two or three things that matter and get back what to keep, what to change,
+              and what to watch. We talk live twice a week, you get a written review every Friday, and
+              on day thirty you get a written plan you can run yourself, with a year of follow-up from me.
             </p>
-            <p className="body-text">
-              Some valuable things remain difficult, and some commitments need discipline. But before
-              prescribing more of it, find out whether the struggle is necessary. Keep the distinction
-              even if we never meet.
+            <p className="body-text" style={{ marginBottom: "2.25rem" }}>
+              $10,000 for the month, with the year of follow-up included.
             </p>
+            <Link href="/apply?program=private" className="btn">Apply</Link>
           </div>
         </section>
       </Fade>
 
-      {/* SECTION 4 — what working together can look like */}
+      {/* SECTION 4 — other ways */}
       <Fade>
         <section className="section">
           <div className="measure">
-            <h2 className="h2 serif" style={{ marginBottom: "1.75rem" }}>
-              What working together can look like.
-            </h2>
-            <p className="body-text" style={{ marginBottom: "1.5rem" }}>
-              It may be one considered response to a question, a continuing exchange of voice or video
-              messages, regular private conversations, or concentrated work together in person. If you
-              want me to set the structure and make the next decisions, we can work that way. If you
-              want to investigate and choose together, we can work that way too. The form of the
-              relationship follows what we discover about your situation.
-            </p>
+            <h2 className="h2 serif" style={{ marginBottom: "1.75rem" }}>Other ways to work with me.</h2>
             <p className="body-text">
-              That can mean practical self-defense from the beginning, hands-on physical instruction,
-              remote work by voice and video from anywhere, or private engagements arranged in your own
-              city.{" "}
+              In person in your city, for a day or several.{" "}
+              <Link href="/in-person" className="crosslink">
+                <span style={{ borderBottom: "1px solid var(--clay)", color: "var(--clay)" }}>Request your city.</span>
+              </Link>{" "}
+              Self-defense from zero: three days in person, a month of coached drills, and a year of
+              support.{" "}
+              <Link href="/self-defense" className="crosslink">
+                <span style={{ borderBottom: "1px solid var(--clay)", color: "var(--clay)" }}>See self-defense.</span>
+              </Link>{" "}
+              Smaller remote options, from a single answered question to ongoing guidance.{" "}
               <Link href="/services" className="crosslink">
-                <span style={{ borderBottom: "1px solid var(--clay)", color: "var(--clay)" }}>
-                  See the ways to work together.
-                </span>
+                <span style={{ borderBottom: "1px solid var(--clay)", color: "var(--clay)" }}>See all of them.</span>
               </Link>
             </p>
           </div>
@@ -138,7 +124,7 @@ export default function Home() {
       <Fade>
         <section className="section">
           <h2 className="h2 serif" style={{ marginBottom: "2rem" }}>What clients say.</h2>
-          <Testimonials reviews={reviews.filter((r) => featuredAuthors.includes(r.author))} />
+          <Testimonials reviews={["Rob M.", "Kayli K."].map((a) => reviews.find((r) => r.author === a))} clamp={false} />
           <p style={{ marginTop: "2rem" }}>
             <Link href="/reviews" className="crosslink">
               <span style={{ borderBottom: "1px solid var(--clay)", color: "var(--clay)" }}>
@@ -154,34 +140,25 @@ export default function Home() {
         <section className="section">
           <div className="measure">
             <h2 className="h2 serif" style={{ marginBottom: "1.75rem" }}>Who I am.</h2>
-            <p className="body-text" style={{ marginBottom: "1.5rem" }}>
+            <p className="body-text">
               I spent three years training judo as a resident athlete at the Olympic Training Center,
               was ranked sixth in the United States, wrestled at the Air Force Academy, and served as
               an Air Force captain. I&rsquo;ve coached since 2004. That experience has given me
               practical tools for teaching physical skill and an enduring interest in how individual
               people learn, make choices, build habits, and discover what they enjoy doing.
             </p>
-            <p className="body-text">
-              I don&rsquo;t assume I know what matters to you before we speak. I can bring attention,
-              experience, observation, instruction, and direct guidance. We find out what those can
-              contribute by engaging with your actual situation.
-            </p>
           </div>
         </section>
       </Fade>
 
-      {/* SECTION 6 — a conversation can be the beginning */}
+      {/* SECTION 6 — close */}
       <Fade>
         <section className="section">
           <div className="measure">
-            <h2 className="h2 serif" style={{ marginBottom: "1.75rem" }}>
-              A conversation can be the beginning.
+            <h2 className="h2 serif" style={{ marginBottom: "2.25rem" }}>
+              Tell me what you want to be different.
             </h2>
-            <p className="lead" style={{ marginBottom: "2.25rem" }}>
-              Tell me what you&rsquo;re curious about, working toward, or trying to understand. If
-              working together looks promising, we&rsquo;ll find a useful way to begin.
-            </p>
-            <Link href="/apply?program=not-sure" className="btn">Tell me what brings you here</Link>
+            <Link href="/apply?program=private" className="btn">Apply</Link>
             <p className="crosslink" style={{ marginTop: "2rem" }}>
               Also: <Link href="/self-defense">self-defense, from zero.</Link>
             </p>
