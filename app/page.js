@@ -5,14 +5,14 @@ import { reviews } from "./lib/reviews";
 import { pageMeta } from "./lib/meta";
 
 export const metadata = pageMeta({
-  title: "Jon-Michael Kerestes | Private Coaching, Four People at a Time",
+  title: "Jon-Michael Kerestes | Private Coaching",
   description:
-    "Private coaching on strength, movement, food, and physical skill from a former Olympic Training Center resident athlete. Four people at a time, and each one hears from him every day, in person or on video.",
+    "Get a former Olympic Training Center athlete on your team. Private coaching for strength, movement, food, and physical skill, in person or on video from anywhere.",
   path: "/",
 });
 
 const CREDENTIALS =
-  "Olympic Training Center resident athlete · Ranked sixth in the country in judo · Air Force Academy wrestler · Coaching since 2004";
+  "Ranked sixth in the country in judo · Air Force Academy wrestler · Coaching since 2004";
 
 export default function Home() {
   const videoUrl = process.env.NEXT_PUBLIC_VIDEO_URL;
@@ -30,19 +30,14 @@ export default function Home() {
             </Fade>
             <Fade delay={80}>
               <h1 className="title serif" style={{ marginBottom: "1.75rem" }}>
-                I coach four people at a time, and each one hears from me every day.
+                Get a former Olympic Training Center athlete on your team.
               </h1>
             </Fade>
             <Fade delay={140}>
-              <p className="lead" style={{ marginBottom: "1.5rem" }}>
-                Strength, movement, food, and physical skill, in person or on video from anywhere. You
-                tell me what you want to be different. Every morning you send me the few things that
-                matter for it, and I send back what to keep, what to change, and what to watch.
-              </p>
-            </Fade>
-            <Fade delay={200}>
-              <p className="body-text" style={{ marginBottom: "2.25rem" }}>
-                You decide how much of the day-to-day deciding you hand to me.
+              <p className="lead" style={{ marginBottom: "2.25rem" }}>
+                For strength, movement, food, and physical skill, in person or on video from anywhere.
+                You say what you want to work on, and every morning you get back what to keep, what to
+                change, and what to watch.
               </p>
             </Fade>
             <Fade delay={260}>

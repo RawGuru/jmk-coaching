@@ -37,7 +37,7 @@ const SERVICES = [
   {
     title: "The private month.",
     body:
-      "My daily attention, for a month, then a year within reach. One hour on day one builds your plan from what you want and where you are. Every morning you send the two or three things that matter and get back what to keep, what to change, and what to watch. Live conversations twice a week, a written review every Friday, and on day thirty a written plan you can run yourself, with a year of follow-up included. I take four people at a time.",
+      "My daily attention, for a month, then a year within reach. One hour on day one builds your plan from what you want and where you are. Every morning you send the two or three things that matter and get back what to keep, what to change, and what to watch. Live conversations twice a week, a written review every Friday, and on day thirty a written plan you can run yourself, with a year of follow-up included.",
     price: "$10,000 for the month, with the year of follow-up included.",
     cta: "Apply",
     href: "/apply?program=private",

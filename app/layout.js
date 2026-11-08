@@ -7,11 +7,11 @@ import Attribution from "./components/Attribution";
 import { SITE_URL } from "./lib/meta";
 
 const DESCRIPTION =
-  "Private coaching from a former Olympic Training Center resident athlete, ranked sixth in the country in judo. Tell him what you want to change and by when; each morning he reads the few numbers that matter and tells you what to keep, change, and watch. Four people at a time.";
+  "Private coaching from a former Olympic Training Center resident athlete, ranked sixth in the country in judo. Tell him what you want to work on, and each morning you get back what to keep, what to change, and what to watch. In person or on video from anywhere.";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Jon-Michael Kerestes | Private Coaching. You Know What You Want Your Body to Be.",
+  title: "Jon-Michael Kerestes | Private Coaching",
   description: DESCRIPTION,
 };
 
